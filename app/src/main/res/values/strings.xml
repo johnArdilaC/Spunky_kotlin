@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Spunky_Kotlin</string>
+    <string name="app_name">Spunky</string>
+    <string name="another_one">Spunky</string>
+    <string name="button_crear">Crear Juego</string>
+    <string name="button_unirse">Unirse</string>
+    <string name="button_jugar">Jugar</string>
+    <string name="label_spunky">Spunky</string>
+    <string name="button_familia">Familia</string>
+    <string name="button_amigos">Amigos</string>
+    <string name="button_trabajo">Trabajo</string>
+    <string name="button_ninos">Niños</string>
+    <string name="label_tipo_grupo">Escoge el tipo de grupo</string>
+
 </resources>
