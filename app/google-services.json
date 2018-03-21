@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "155855972528",
+    "firebase_url": "https://spunky-ppg.firebaseio.com",
+    "project_id": "spunky-ppg",
+    "storage_bucket": "spunky-ppg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155855972528:android:476c9844008d3642",
+        "android_client_info": {
+          "package_name": "com.ppg.spunky_kotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155855972528-1a070ccqvkv7o696809sh6m5lh6vc62i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ppg.spunky_kotlin",
+            "certificate_hash": "b1321bf63c2292f73aef7ebd38c60b6da1ec3e87"
+          }
+        },
+        {
+          "client_id": "155855972528-bud5be7j2uo4lhdjh19s64higd1mvlnb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0FZ-ou6ZkR2byK2sTEwbTEt3I2HtKrHA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155855972528-bud5be7j2uo4lhdjh19s64higd1mvlnb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

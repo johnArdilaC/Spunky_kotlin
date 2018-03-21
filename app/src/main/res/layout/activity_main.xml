@@ -36,7 +36,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:background="@color/colorContrast"
+        android:background="@drawable/my_button"
         android:fontFamily="@font/cabin"
         android:text="@string/button_jugar"
         android:textAllCaps="false"
@@ -52,10 +52,13 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="423dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
         android:layout_height="137dp"
         android:layout_marginBottom="28dp"
-        android:background="@color/colorContrast"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/my_button"
         android:fontFamily="@font/cabin"
         android:text="@string/button_crear"
         android:textAllCaps="false"
@@ -65,14 +68,17 @@
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
+
         tools:text="@string/button_crear" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="423dp"
+        android:layout_width="0dp"
         android:layout_height="137dp"
         android:layout_marginBottom="88dp"
-        android:background="@color/colorContrast"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/my_button"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/button_unirse"
         android:textAllCaps="false"
@@ -81,7 +87,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+        app:layout_constraintStart_toEndOf="@+id/guideline2" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -107,7 +113,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintGuide_end="612dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="611dp"
+        android:layout_marginLeft="188dp" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btn_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1095dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_sign_out"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1095dp"
+        android:layout_marginTop="64dp"
+        android:layout_weight="1"
+        android:text="Sign Out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline3"

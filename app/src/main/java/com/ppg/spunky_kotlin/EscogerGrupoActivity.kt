@@ -7,7 +7,6 @@ class EscogerGrupoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.AppThemeBar)
         setContentView(R.layout.activity_escoger_grupo)
     }
 }

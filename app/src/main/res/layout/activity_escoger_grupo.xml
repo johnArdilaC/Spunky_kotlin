@@ -6,79 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.ppg.spunky_kotlin.EscogerGrupoActivity">
 
-    <Button
-        android:id="@+id/BNinos"
-        android:layout_width="325dp"
-        android:layout_height="325dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/colorBlue"
-        android:fontFamily="@font/cabin"
-        android:text="Niños"
-        android:textSize="30sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/BTrabajo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/button_ninos" />
-
-    <Button
-        android:id="@+id/BTrabajo"
-        android:layout_width="325dp"
-        android:layout_height="325dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPurple"
-        android:fontFamily="@font/cabin"
-        android:text="Trabajo"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.105"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BAmigos"
-        app:layout_constraintVertical_bias="0.132"
-        tools:text="@string/button_trabajo" />
-
-    <Button
-        android:id="@+id/BFamilia"
-        android:layout_width="325dp"
-        android:layout_height="325dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/colorYellow"
-        android:fontFamily="@font/cabin"
-        android:text="Familia"
-        android:textSize="30sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/BAmigos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/button_familia" />
-
-    <Button
-        android:id="@+id/BAmigos"
-        android:layout_width="325dp"
-        android:layout_height="325dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="244dp"
-        android:background="@color/colorGreen"
-        android:fontFamily="@font/cabin"
-        android:text="Amigos"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.105"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/button_amigos" />
-
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="384dp"
-        android:layout_height="71dp"
+        android:layout_width="512dp"
+        android:layout_height="89dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -86,19 +17,54 @@
         android:fontFamily="@font/cabin"
         android:text="Escoge el tipo de grupo"
         android:textAlignment="center"
-        android:textSize="35sp"
+        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075"
+        app:layout_constraintVertical_bias="0.598"
         tools:text="@string/label_tipo_grupo" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="512dp"
+        android:layout_height="89dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/cabin"
+        android:text="Escoge el tipo de grupo"
+        android:textAlignment="center"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.048"
+        tools:text="@string/label_tipo_grupo" />
+
+    <RadioButton
+        android:id="@+id/radioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="120dp" />
+        android:text="RadioButton"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="267dp" />
+
+    <RadioButton
+        android:id="@+id/radioButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        tools:layout_editor_absoluteX="460dp"
+        tools:layout_editor_absoluteY="321dp" />
+
+    <RadioGroup
+        android:layout_width="222dp"
+        android:layout_height="112dp"
+        tools:layout_editor_absoluteX="384dp"
+        tools:layout_editor_absoluteY="281dp" />
+
 
 </android.support.constraint.ConstraintLayout>
