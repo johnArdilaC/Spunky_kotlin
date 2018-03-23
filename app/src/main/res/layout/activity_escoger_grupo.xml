@@ -7,64 +7,234 @@
     tools:context="com.ppg.spunky_kotlin.EscogerGrupoActivity">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="512dp"
-        android:layout_height="89dp"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/LConquien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="72dp"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
         android:fontFamily="@font/cabin"
-        android:text="Escoge el tipo de grupo"
+        android:text="@string/label_tipo_grupo"
         android:textAlignment="center"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.598"
-        tools:text="@string/label_tipo_grupo" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="512dp"
-        android:layout_height="89dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/cabin"
-        android:text="Escoge el tipo de grupo"
-        android:textAlignment="center"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.048"
-        tools:text="@string/label_tipo_grupo" />
-
-    <RadioButton
-        android:id="@+id/radioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RadioButton"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="267dp" />
-
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RadioButton"
-        tools:layout_editor_absoluteX="460dp"
-        tools:layout_editor_absoluteY="321dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
-        android:layout_width="222dp"
-        android:layout_height="112dp"
-        tools:layout_editor_absoluteX="384dp"
-        tools:layout_editor_absoluteY="281dp" />
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="279dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/LHaypersonas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.825">
+
+        <RadioButton
+            android:id="@+id/RAmigos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:drawableEnd="@drawable/amigos"
+            android:drawablePadding="8sp"
+            android:drawableRight="@drawable/amigos"
+            android:fontFamily="@font/cabin"
+            android:layoutDirection="rtl"
+            android:paddingLeft="4sp"
+            android:paddingTop="4sp"
+            android:text="@string/button_amigos"
+            android:textAlignment="textStart"
+            android:textSize="22sp" />
+
+        />
+
+        <RadioButton
+            android:id="@+id/RFamilia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:drawableEnd="@drawable/familia"
+            android:drawablePadding="8sp"
+            android:drawableRight="@drawable/familia"
+            android:fontFamily="@font/cabin"
+            android:layoutDirection="rtl"
+            android:paddingLeft="4sp"
+            android:paddingTop="8sp"
+            android:text="@string/radio_familia"
+            android:textAlignment="textStart"
+            android:textSize="22sp" />
+
+        <RadioButton
+            android:id="@+id/RTrabajo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:drawableEnd="@drawable/trabajo"
+            android:drawablePadding="8sp"
+            android:drawableRight="@drawable/trabajo"
+            android:fontFamily="@font/cabin"
+            android:layoutDirection="rtl"
+            android:paddingLeft="4sp"
+            android:paddingTop="8sp"
+            android:text="@string/button_trabajo"
+            android:textAlignment="textStart"
+            android:textSize="22sp" />
+
+        <RadioButton
+            android:id="@+id/RDesconocidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:drawableEnd="@drawable/desconocidos"
+            android:drawablePadding="8sp"
+            android:drawableRight="@drawable/desconocidos"
+            android:fontFamily="@font/cabin"
+            android:layoutDirection="rtl"
+            android:paddingLeft="4sp"
+            android:paddingTop="8sp"
+            android:text="@string/button_desconocidos"
+            android:textAlignment="textStart"
+            android:textSize="22sp" />
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/LHaypersonas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:fontFamily="@font/cabin"
+        android:text="@string/label_edades"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup3"
+        android:layout_width="match_parent"
+        android:layout_height="477dp"
+        android:layout_marginBottom="56dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:elevation="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/BSiguiente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <CheckBox
+            android:id="@+id/CMenores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:drawableEnd="@drawable/menores"
+            android:drawablePadding="8sp"
+            android:drawableRight="@drawable/menores"
+            android:elevation="24dp"
+            android:fontFamily="@font/cabin"
+            android:layoutDirection="rtl"
+            android:paddingLeft="4sp"
+            android:paddingTop="4sp"
+            android:text="@string/text_menores"
+            android:textAlignment="textStart"
+            android:textSize="22sp" />
+
+        <CheckBox
+            android:id="@+id/CJovenes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:drawableEnd="@drawable/jovenes"
+            android:drawablePadding="8sp"
+            android:drawableRight="@drawable/jovenes"
+            android:fontFamily="@font/cabin"
+            android:layoutDirection="rtl"
+            android:paddingLeft="4sp"
+            android:paddingTop="8sp"
+            android:text="@string/text_jovenes"
+            android:textAlignment="textStart"
+            android:textSize="22sp" />
+
+        <CheckBox
+            android:id="@+id/CAdultos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:drawableEnd="@drawable/adultos"
+            android:drawablePadding="8sp"
+            android:drawableRight="@drawable/adultos"
+            android:fontFamily="@font/cabin"
+            android:layoutDirection="rtl"
+            android:paddingLeft="4sp"
+            android:paddingTop="8sp"
+            android:text="@string/text_adultos"
+            android:textAlignment="textStart"
+            android:textSize="22sp" />
+
+        <CheckBox
+            android:id="@+id/CMayores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:drawableEnd="@drawable/mayores"
+            android:drawablePadding="8sp"
+            android:drawableRight="@drawable/mayores"
+            android:fontFamily="@font/cabin"
+            android:layoutDirection="rtl"
+            android:paddingLeft="4sp"
+            android:paddingTop="8sp"
+            android:text="@string/text_mayores"
+            android:textAlignment="textStart"
+            android:textSize="22sp" />
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/BSiguiente"
+        android:layout_width="0dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:fontFamily="@font/cabin"
+        android:text="@string/button_siguiente"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.067" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -10,6 +10,8 @@
     <string name="button_trabajo">Trabajo</string>
     <string name="button_ninos">Niños</string>
     <string name="label_tipo_grupo">Escoge el tipo de grupo</string>
+    <string name="label_tipo_edad">Hay personas...</string>
+
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -24,5 +26,13 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="radio_familia">Familia</string>
+    <string name="button_desconocidos">Desconocidos</string>
+    <string name="text_menores">Menores</string>
+    <string name="text_jovenes">Jovenes</string>
+    <string name="text_adultos">Adultos</string>
+    <string name="text_mayores">Mayores</string>
+    <string name="button_siguiente">Siguiente</string>
+    <string name="label_edades">Edades</string>
 
 </resources>
