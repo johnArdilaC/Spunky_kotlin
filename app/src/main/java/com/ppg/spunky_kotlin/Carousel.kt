@@ -10,7 +10,7 @@ import android.widget.Toast
 class Carousel : AppCompatActivity() {
 
     lateinit var mPager: ViewPager
-    var path: IntArray = intArrayOf(R.drawable.trivia,R.drawable.charada, R.drawable.otro)
+    var path: IntArray = intArrayOf(R.drawable.trivia,R.drawable.verdad, R.drawable.charada)
     //var btn = findViewById<Button>(R.id.btnjugar) as Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
