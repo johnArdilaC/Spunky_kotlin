@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
         btn_sign_in.setOnClickListener(this)
         button1.setOnClickListener(this)
         btn_sign_out.setOnClickListener(this)
+        button2.setOnClickListener(this)
+        button3.setOnClickListener(this)
+
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(WEB_CLIENT_ID)
@@ -62,12 +65,28 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
             R.id.btn_sign_in -> signIn()
             R.id.button1 -> escogerGrupo()
             R.id.btn_sign_out -> signOut()
+            R.id.button2 -> crearJuego()
+            R.id.button3 -> test()
+
+
         }
     }
 
     private fun escogerGrupo()
     {
         val intent = Intent(this, EscogerGrupoActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun crearJuego()
+    {
+        val intent = Intent(this, EnConstruccionActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun test()
+    {
+        val intent = Intent(this, TestCheckable::class.java)
         startActivity(intent)
     }
 

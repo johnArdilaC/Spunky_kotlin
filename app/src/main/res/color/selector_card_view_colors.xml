@@ -2,9 +2,9 @@
 <selector
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:color="#CE93D8"
-        android:state_pressed="true" />
-    <item android:color="#E1BEE7"
+    <item android:color="@color/colorAccent"
         android:state_checked="true" />
-    <item android:color="#F3E5F5" />
+    <item android:color="@color/cardview_light_background"
+        android:state_checked="false" />
+    <item android:color="@color/colorBlue" />
 </selector>

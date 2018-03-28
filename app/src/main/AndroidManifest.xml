@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.ppg.spunky_kotlin.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,13 +27,14 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name="com.ppg.spunky_kotlin.EscogerGrupoActivity"
-            android:parentActivityName="com.ppg.spunky_kotlin.MainActivity">
+            android:name=".EscogerGrupoActivity"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ppg.spunky_kotlin.MainActivity" />
         </activity>
-
+        <activity android:name=".TestCheckable" />
+        <activity android:name=".EnConstruccionActivity"></activity>
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_escoger_grupo.*
 
 class EscogerGrupoActivity : AppCompatActivity() {
 
@@ -21,7 +22,7 @@ class EscogerGrupoActivity : AppCompatActivity() {
         Log.d("Da reference", gruposReference.toString())
 
         Log.d("Da groups", grupos.toString())
-
+        //RAmigos.text = grupos[1]
     }
 
     //Get stuff from DB

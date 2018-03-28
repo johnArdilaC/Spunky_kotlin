@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        tools:context="com.ppg.spunky_kotlin.TestCheckable">
+
+        <com.ppg.spunky_kotlin.cardview.CheckableCardView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginRight="16dp"
+            card_view:card_text="Unselected" />
+
+    <com.ppg.spunky_kotlin.cardview.CheckableCardView
+        android:id="@+id/card_view_pressed"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginRight="16dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:card_text="Pressed" />
+
+        <com.ppg.spunky_kotlin.cardview.CheckableCardView
+            android:id="@+id/card_view_checked"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            card_view:card_text="Checked" />
+
+    </LinearLayout>

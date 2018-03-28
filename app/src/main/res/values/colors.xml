@@ -4,10 +4,12 @@
     <color name="colorBackground">#2b87a6</color>
     <color name="colorContrast">#8bc34a</color>
     <color name="colorPrimaryDark">#8bc34a</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff4081</color>
     <color name="colorBlack">#000000</color>
     <color name="colorYellow">#ffb56f</color>
     <color name="colorBlue">#67cde0</color>
     <color name="colorGreen">#c5f44b</color>
     <color name="colorPurple">#e062b7</color>
+    <color name="colorRed">#ff0000</color>
+
 </resources>

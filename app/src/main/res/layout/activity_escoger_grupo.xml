@@ -4,237 +4,406 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ppg.spunky_kotlin.EscogerGrupoActivity">
+    tools:context="com.ppg.spunky_kotlin.EscogerGrupoActivity"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    >
+
 
     <TextView
-        android:id="@+id/LConquien"
-        android:layout_width="match_parent"
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp"
-        android:fontFamily="@font/cabin"
+        android:layout_marginEnd="45dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="48dp"
         android:text="@string/label_tipo_grupo"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_light"
-        android:textSize="30sp"
+        android:textColor="@android:color/background_dark"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
+    <GridLayout
+        android:id="@+id/groupGrid"
         android:layout_width="match_parent"
-        android:layout_height="279dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:elevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/LHaypersonas"
+        android:layout_height="450dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="8"
+        android:alignmentMode="alignMargins"
+        android:columnCount="2"
+        android:columnOrderPreserved="false"
+        android:padding="0dp"
+        android:rowCount="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.825">
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-        <RadioButton
-            android:id="@+id/RAmigos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_weight="1"
-            android:drawableEnd="@drawable/amigos"
-            android:drawablePadding="8sp"
-            android:drawableRight="@drawable/amigos"
-            android:fontFamily="@font/cabin"
-            android:layoutDirection="rtl"
-            android:paddingLeft="4sp"
-            android:paddingTop="4sp"
-            android:text="@string/button_amigos"
-            android:textAlignment="textStart"
-            android:textSize="22sp" />
+        <!-- Row 1 -->
 
-        />
+        <!-- Column 1 -->
+        <com.ppg.spunky_kotlin.cardview.CheckableCardView
+            android:id="@+id/card_amigos"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            card_view:card_background="blue"
+            >
 
-        <RadioButton
-            android:id="@+id/RFamilia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_weight="1"
-            android:drawableEnd="@drawable/familia"
-            android:drawablePadding="8sp"
-            android:drawableRight="@drawable/familia"
-            android:fontFamily="@font/cabin"
-            android:layoutDirection="rtl"
-            android:paddingLeft="4sp"
-            android:paddingTop="8sp"
-            android:text="@string/radio_familia"
-            android:textAlignment="textStart"
-            android:textSize="22sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/RTrabajo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_weight="1"
-            android:drawableEnd="@drawable/trabajo"
-            android:drawablePadding="8sp"
-            android:drawableRight="@drawable/trabajo"
-            android:fontFamily="@font/cabin"
-            android:layoutDirection="rtl"
-            android:paddingLeft="4sp"
-            android:paddingTop="8sp"
-            android:text="@string/button_trabajo"
-            android:textAlignment="textStart"
-            android:textSize="22sp" />
 
-        <RadioButton
-            android:id="@+id/RDesconocidos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_weight="1"
-            android:drawableEnd="@drawable/desconocidos"
-            android:drawablePadding="8sp"
-            android:drawableRight="@drawable/desconocidos"
-            android:fontFamily="@font/cabin"
-            android:layoutDirection="rtl"
-            android:paddingLeft="4sp"
-            android:paddingTop="8sp"
-            android:text="@string/button_desconocidos"
-            android:textAlignment="textStart"
-            android:textSize="22sp" />
-    </RadioGroup>
+            </LinearLayout>
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/amigos" />
+
+        </com.ppg.spunky_kotlin.cardview.CheckableCardView>
+
+        <!-- Column 2 -->
+        <com.ppg.spunky_kotlin.cardview.CheckableCardView
+            android:id="@+id/card_familia"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            card_view:card_background="green"
+            android:foreground="?android:attr/selectableItemBackground"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/familia" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_familia"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.ppg.spunky_kotlin.cardview.CheckableCardView>
+
+
+        <!-- Row 2 -->
+
+        <!-- Column 1 -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_trabajo"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            app:cardBackgroundColor="@android:color/holo_orange_dark"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/trabajo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_trabajo"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!-- Column 2 -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_desconocidos"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            app:cardBackgroundColor="@android:color/holo_red_dark"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/desconocidos" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_desconocidos"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </GridLayout>
 
     <TextView
-        android:id="@+id/LHaypersonas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp"
-        android:fontFamily="@font/cabin"
-        android:text="@string/label_edades"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_light"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup3"
-        android:layout_width="match_parent"
-        android:layout_height="477dp"
-        android:layout_marginBottom="56dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:elevation="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/BSiguiente"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <CheckBox
-            android:id="@+id/CMenores"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_weight="1"
-            android:drawableEnd="@drawable/menores"
-            android:drawablePadding="8sp"
-            android:drawableRight="@drawable/menores"
-            android:elevation="24dp"
-            android:fontFamily="@font/cabin"
-            android:layoutDirection="rtl"
-            android:paddingLeft="4sp"
-            android:paddingTop="4sp"
-            android:text="@string/text_menores"
-            android:textAlignment="textStart"
-            android:textSize="22sp" />
-
-        <CheckBox
-            android:id="@+id/CJovenes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_weight="1"
-            android:drawableEnd="@drawable/jovenes"
-            android:drawablePadding="8sp"
-            android:drawableRight="@drawable/jovenes"
-            android:fontFamily="@font/cabin"
-            android:layoutDirection="rtl"
-            android:paddingLeft="4sp"
-            android:paddingTop="8sp"
-            android:text="@string/text_jovenes"
-            android:textAlignment="textStart"
-            android:textSize="22sp" />
-
-        <CheckBox
-            android:id="@+id/CAdultos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_weight="1"
-            android:drawableEnd="@drawable/adultos"
-            android:drawablePadding="8sp"
-            android:drawableRight="@drawable/adultos"
-            android:fontFamily="@font/cabin"
-            android:layoutDirection="rtl"
-            android:paddingLeft="4sp"
-            android:paddingTop="8sp"
-            android:text="@string/text_adultos"
-            android:textAlignment="textStart"
-            android:textSize="22sp" />
-
-        <CheckBox
-            android:id="@+id/CMayores"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_weight="1"
-            android:drawableEnd="@drawable/mayores"
-            android:drawablePadding="8sp"
-            android:drawableRight="@drawable/mayores"
-            android:fontFamily="@font/cabin"
-            android:layoutDirection="rtl"
-            android:paddingLeft="4sp"
-            android:paddingTop="8sp"
-            android:text="@string/text_mayores"
-            android:textAlignment="textStart"
-            android:textSize="22sp" />
-    </RadioGroup>
-
-
-    <Button
-        android:id="@+id/BSiguiente"
+        android:id="@+id/textView9"
         android:layout_width="0dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="44dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:fontFamily="@font/cabin"
-        android:text="@string/button_siguiente"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="45dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/label_tipo_edad"
+        android:textColor="@color/colorBlack"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.067" />
+        app:layout_constraintTop_toBottomOf="@+id/groupGrid" />
+
+    <GridLayout
+        android:id="@+id/ageGrid"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="8"
+        android:alignmentMode="alignMargins"
+        android:columnCount="2"
+        android:columnOrderPreserved="false"
+        android:padding="0dp"
+        android:rowCount="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+        <!-- Row 1 -->
+
+        <!-- Column 1 -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_menores"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            app:cardBackgroundColor="@android:color/holo_green_dark"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/menores" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_menores"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!-- Column 2 -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_jovenes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            app:cardBackgroundColor="@android:color/holo_blue_dark"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/jovenes" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_jovenes"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <!-- Row 2 -->
+
+        <!-- Column 1 -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_adultos"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            app:cardBackgroundColor="@android:color/holo_red_dark"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/adultos" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_adultos"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!-- Column 2 -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_mayores"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            app:cardBackgroundColor="@android:color/holo_orange_dark"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/mayores" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_mayores"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </GridLayout>
 
 
 </android.support.constraint.ConstraintLayout>

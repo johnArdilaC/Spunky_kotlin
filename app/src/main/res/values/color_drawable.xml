@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <drawable name="red_color">#ff0000</drawable>
-    <drawable name="blue_color">#0000ff</drawable>
-    <drawable name="green_color">#00ff00</drawable>
+    <drawable name="red">@android:color/holo_red_dark</drawable>
+    <drawable name="blue">@android:color/holo_blue_dark</drawable>
+    <drawable name="green">@android:color/holo_green_dark</drawable>
+    <drawable name="orange">@android:color/holo_orange_dark</drawable>
+
 </resources>

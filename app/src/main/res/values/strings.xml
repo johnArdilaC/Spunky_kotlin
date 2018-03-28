@@ -34,5 +34,6 @@
     <string name="text_mayores">Mayores</string>
     <string name="button_siguiente">Siguiente</string>
     <string name="label_edades">Edades</string>
+    <string name="label_construccion">Estamos trabajando para brindarte la mejor experiencia</string>
 
 </resources>
