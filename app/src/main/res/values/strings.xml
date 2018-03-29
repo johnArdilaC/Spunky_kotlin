@@ -29,11 +29,17 @@
     <string name="radio_familia">Familia</string>
     <string name="button_desconocidos">Desconocidos</string>
     <string name="text_menores">Menores</string>
-    <string name="text_jovenes">Jovenes</string>
+    <string name="text_jovenes">Jóvenes</string>
     <string name="text_adultos">Adultos</string>
     <string name="text_mayores">Mayores</string>
     <string name="button_siguiente">Siguiente</string>
     <string name="label_edades">Edades</string>
     <string name="label_construccion">Estamos trabajando para brindarte la mejor experiencia</string>
+
+    <string name="label_informacion">Información</string>
+    <string name="label_edades_completar">Selecciona por lo menos un rango de edades (menores, jovenes, adultos, mayores )</string>
+    <string name="button_ok">Ok</string>
+    <string name="label_completar">Selecciona por lo menos un grupo (amigos, familia, trabajo, desconocidos)</string>
+
 
 </resources>

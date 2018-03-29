@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.Checkable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ppg.spunky_kotlin.R;
@@ -28,6 +29,7 @@ public class CheckableCardView  extends CardView implements Checkable {
     };
 
     private boolean isChecked;
+    private String text;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public CheckableCardView(Context context) {
@@ -59,8 +61,25 @@ public class CheckableCardView  extends CardView implements Checkable {
         if (attrs != null) {
             TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.CheckableCardView, 0, 0);
             try {
-                String text = ta.getString(R.styleable.CheckableCardView_card_text);
+                text = ta.getString(R.styleable.CheckableCardView_card_text);
                 TextView itemText = findViewById(R.id.text);
+
+                if (text != null) {
+                    itemText.setText(text);
+                }
+
+                String image = ta.getString(R.styleable.CheckableCardView_card_image);
+                ImageView itemImage = findViewById(R.id.image);
+
+                if (image != null) {
+                    String txtimage=image.split("/")[2];
+                    String txt2 = txtimage.split(".png")[0];
+                    int id = getResources().getIdentifier(txt2,"drawable", getContext().getPackageName());
+                    System.out.println("da int "+id);
+
+                    itemImage.setImageResource(id);
+                }
+
 
                 String backgroundColor = ta.getString(R.styleable.CheckableCardView_card_background);
                 System.out.println(backgroundColor);
@@ -82,9 +101,7 @@ public class CheckableCardView  extends CardView implements Checkable {
                 setCardBackgroundColor(myColorStateList);
 
 
-                if (text != null) {
-                    itemText.setText(text);
-                }
+
 
             } catch (Exception e) {
                 Log.e("MyTag", "Failure to get drawable id.", e);
@@ -109,6 +126,9 @@ public class CheckableCardView  extends CardView implements Checkable {
         return super.performClick();
     }
 
+    public String getText(){
+        return  text;
+    }
     @Override
     public void setChecked(boolean checked) {
         this.isChecked = checked;

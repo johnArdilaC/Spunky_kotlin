@@ -67,8 +67,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
             R.id.btn_sign_out -> signOut()
             R.id.button2 -> crearJuego()
             R.id.button3 -> test()
-
-
         }
     }
 
