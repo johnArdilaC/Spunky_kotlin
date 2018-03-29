@@ -4,5 +4,8 @@
     <drawable name="blue">@android:color/holo_blue_dark</drawable>
     <drawable name="green">@android:color/holo_green_dark</drawable>
     <drawable name="orange">@android:color/holo_orange_dark</drawable>
+    <drawable name="redAnswer">#CD2A21</drawable>
+    <drawable name="greenAnswer">#8BC34A</drawable>
+
 
 </resources>

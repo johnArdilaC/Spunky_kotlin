@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -82,25 +83,28 @@ public class CheckableCardView  extends CardView implements Checkable {
 
 
                 String backgroundColor = ta.getString(R.styleable.CheckableCardView_card_background);
-                System.out.println(backgroundColor);
-                Class res = R.drawable.class;
-                Field field = res.getField(backgroundColor);
 
-                ColorStateList myColorStateList = new ColorStateList(
-                        new int[][]{
-                                new int[]{android.R.attr.state_checked},
-                                new int[]{}
-                        },
-                        new int[] {
-                                getContext().getResources().getColor(R.color.colorAccent),
-                                getResources().getColor(field.getInt(null))
+                if(backgroundColor!=null){
+                    System.out.println(backgroundColor);
+                    Class res = R.drawable.class;
+                    Field field = res.getField(backgroundColor);
 
-                        }
-                );
+                    ColorStateList myColorStateList = new ColorStateList(
+                            new int[][]{
+                                    new int[]{android.R.attr.state_checked},
+                                    new int[]{}
+                            },
+                            new int[] {
+                                    getContext().getResources().getColor(R.color.colorAccent),
+                                    getResources().getColor(field.getInt(null))
 
-                setCardBackgroundColor(myColorStateList);
+                            }
+                    );
 
-
+                    setCardBackgroundColor(myColorStateList);
+                }
+                else
+                    setCardBackgroundColor(ContextCompat.getColorStateList(getContext(), R.color.selector_card_view_colors));
 
 
             } catch (Exception e) {
@@ -129,6 +133,12 @@ public class CheckableCardView  extends CardView implements Checkable {
     public String getText(){
         return  text;
     }
+
+    public void setText(String text){
+        TextView itemText = findViewById(R.id.text);
+        itemText.setText(text);
+    }
+
     @Override
     public void setChecked(boolean checked) {
         this.isChecked = checked;

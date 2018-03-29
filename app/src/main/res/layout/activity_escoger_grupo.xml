@@ -57,6 +57,8 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
+            app:cardBackgroundColor="@android:color/holo_blue_dark"
+
             card_view:card_background="blue"
             card_view:card_text="@string/button_amigos"
             card_view:card_image="@drawable/amigos">
@@ -77,6 +79,7 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
+            app:cardBackgroundColor="@drawable/green"
             card_view:card_background="green"
             card_view:card_text="@string/button_familia"
             card_view:card_image="@drawable/familia">
@@ -100,6 +103,8 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
+            app:cardBackgroundColor="@android:color/holo_orange_dark"
+
             card_view:card_background="orange"
             card_view:card_text="@string/button_trabajo"
             card_view:card_image="@drawable/trabajo">
@@ -117,7 +122,7 @@
             android:layout_marginRight="16dp"
             android:layout_rowWeight="1"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@android:color/holo_red_dark"
+            app:cardBackgroundColor="@drawable/red"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
             card_view:card_background="red"
@@ -176,7 +181,7 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@android:color/holo_green_dark"
             app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
+            app:cardElevation="2dp"
             card_view:card_background="green"
             card_view:card_text="@string/text_menores"
             card_view:card_image="@drawable/menores">
@@ -196,7 +201,9 @@
             android:layout_rowWeight="1"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@android:color/holo_blue_dark"
+
             card_view:card_background="blue"
             card_view:card_text="@string/text_jovenes"
             card_view:card_image="@drawable/jovenes">
@@ -218,8 +225,10 @@
             android:layout_rowWeight="1"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
+            app:cardElevation="2dp"
             card_view:card_background="red"
+            app:cardBackgroundColor="@android:color/holo_red_dark"
+
             card_view:card_text="@string/text_adultos"
             card_view:card_image="@drawable/adultos">
 
@@ -237,7 +246,9 @@
             android:layout_rowWeight="1"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@android:color/holo_orange_dark"
+
             card_view:card_background="orange"
             card_view:card_text="@string/text_mayores"
             card_view:card_image="@drawable/mayores">

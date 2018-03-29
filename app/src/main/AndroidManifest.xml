@@ -34,7 +34,9 @@
                 android:value="com.ppg.spunky_kotlin.MainActivity" />
         </activity>
         <activity android:name=".TestCheckable" />
-        <activity android:name=".EnConstruccionActivity"></activity>
+        <activity android:name=".EnConstruccionActivity" />
+        <activity android:name=".Carousel" />
+        <activity android:name=".PreguntaActivity"></activity>
     </application>
 
 </manifest>

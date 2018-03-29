@@ -1,12 +1,11 @@
 package com.ppg.spunky_kotlin
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.IntegerRes
-import android.support.v4.math.MathUtils
+
 import android.support.v7.app.AlertDialog
-import android.util.Log
 import android.view.View
 
 import com.google.firebase.database.*
@@ -15,25 +14,19 @@ import kotlinx.android.synthetic.main.activity_escoger_grupo.*
 
 class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
-    // Write a message to the database
-    private val grupos: MutableList<String> = mutableListOf()
-
+    //Firebase vars
     private val mRootDB: FirebaseDatabase = FirebaseDatabase.getInstance()
+
     private val gruposReference: DatabaseReference = mRootDB.reference.child("Grupos")
     private val edadesReference: DatabaseReference = mRootDB.reference.child("Edades")
 
-    var grupoSeleccionado:String = ""
-
+    private var grupoSeleccionado:String = ""
     private var edadesSeleccionadas:Array<String> = arrayOf()
     private var preguntasTotales:MutableList<Integer> = mutableListOf()
-
     private var preguntasAptas:MutableList<Integer> = mutableListOf()
-
-
 
     private var groupView:Array<CheckableCardView> = arrayOf()
     private var ageView:Array<CheckableCardView> = arrayOf()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,15 +35,9 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         groupView = arrayOf(card_amigos,card_trabajo,card_desconocidos,card_familia)
         ageView = arrayOf(card_menores,card_jovenes,card_adultos,card_mayores)
 
+        groupView.forEach { it.setOnClickListener(this) }
 
-        card_amigos.setOnClickListener(this)
-        card_trabajo.setOnClickListener(this)
-        card_familia.setOnClickListener(this)
-        card_desconocidos.setOnClickListener(this)
         siguiente.setOnClickListener(this)
-
-
-
     }
 
     /**
@@ -66,12 +53,11 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
             R.id.card_desconocidos -> unToggle(card_desconocidos)
             R.id.card_familia -> unToggle(card_familia)
             R.id.siguiente -> oprimirSiguiente()
-
         }
     }
 
     /**
-     * Cuando selecciona un grupo, deshabilita todos los demás
+     * Cuando selecciona un(una card) grupo, deshabilita todos los demás
      */
     private fun unToggle(thecard: CheckableCardView)
     {
@@ -81,11 +67,10 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         }
         else
             enableElse(thecard)
-
     }
 
     /**
-     * Deshabilitar las botones que no sean el actual
+     * Deshabilitar las cards que no sean la actual
      */
     private fun disableElse(thecard: CheckableCardView){
         println("Disabling all but " + thecard)
@@ -96,7 +81,6 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
                 it.isEnabled=false
                 println(" Disabled "+ it.toString())
             }
-
         }
     }
 
@@ -108,10 +92,8 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
         groupView.forEach {
             if(it.id!=thecard.id){
-
                 it.isEnabled=true
             }
-
         }
     }
 
@@ -129,7 +111,6 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
             grupoSeleccionado=findCheckedGroup()
 
             if(ageView.any { it.isChecked }){
-
                 edadesSeleccionadas = findCheckedAges()
                 initGrupos()
             }
@@ -180,9 +161,9 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         return checkedAges
     }
 
-
-
-    //Get stuff from DB
+    /**
+     * Inicializa las preguntas dado el grupo y las edades escogidas
+     */
     private fun initGrupos() {
 
         //Añadir preguntas compatibles con edad
@@ -191,15 +172,10 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
                 edadesSeleccionadas.forEach {
 
-
                     val hijo:DataSnapshot = dataSnapshot.child(it)
                     val idStringArray = hijo.child("preguntas").value.toString().replace("{","").replace("}","").split(",")
 
-                    idStringArray.forEach {
-                        preguntasTotales.add(Integer(Integer.valueOf(it))) }
-
-                    println("preguntas totales"+preguntasTotales.toString())
-
+                    idStringArray.forEach { preguntasTotales.add(Integer(Integer.valueOf(it))) }
                 }
             }
             override fun onCancelled(databaseError: DatabaseError) {
@@ -214,16 +190,12 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         val gruposListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-
                 println("el grupo" + grupoSeleccionado)
                 val hijo:DataSnapshot = dataSnapshot.child(grupoSeleccionado)
 
                 val idStringArray = hijo.child("preguntas").value.toString().replace("{","").replace("}","").split(",")
 
-
-                idStringArray.forEach {
-                    preguntasTotales.add(Integer(Integer.valueOf(it)))
-                }
+                idStringArray.forEach {preguntasTotales.add(Integer(Integer.valueOf(it)))}
 
                 println("preguntas totales en grupo "+preguntasTotales.toString())
 
@@ -238,7 +210,13 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
         println("total APTAS  "  + preguntasAptas)
 
-
-
+        siguiente()
     }
+
+    private fun siguiente()
+    {
+        val intent = Intent(this, PreguntaActivity::class.java)
+        startActivity(intent)
+    }
+
 }

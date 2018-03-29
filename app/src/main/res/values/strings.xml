@@ -40,6 +40,10 @@
     <string name="label_edades_completar">Selecciona por lo menos un rango de edades (menores, jovenes, adultos, mayores )</string>
     <string name="button_ok">Ok</string>
     <string name="label_completar">Selecciona por lo menos un grupo (amigos, familia, trabajo, desconocidos)</string>
+    <string name="label_puntos">¡Correcto! Ganaste 2 puntos</string>
+    <string name="label_incorrecto">Respuesta incorrecta</string>
+    <string name="label_Mpuntos">¡Incorrecto! No ganaste ningún punto</string>
+    <string name="label_correcto">Respuesta correcta</string>
 
 
 </resources>
