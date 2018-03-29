@@ -1,6 +1,7 @@
 package com.ppg.spunky_kotlin
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -17,29 +18,31 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener {
     private var opciones:Array<CheckableCardView> = arrayOf()
     private var correcta=""
 
+    private var preguntas:IntArray = intArrayOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pregunta)
 
+        //PASAR PREGUNTAS
+        preguntas = intent.getIntArrayExtra(EscogerGrupoActivity.Constants.PREGUNTAS)
+
         opciones = arrayOf(card_a,card_b,card_c,card_d)
         opciones.forEach { it.setOnClickListener(this) }
-        initPreguntas()
+        initPreguntas(preguntas[0])
     }
 
     /**
      * Busca la pregunta en la base de datos e inicializa los textos de la pregunta y las respuestas
      */
-    private fun initPreguntas(){
+    private fun initPreguntas(idPregunta:Int){
 
-        val idPregunta = 1
-        val idPreguntaD = 1.0
-
-        val query:Query = preguntasReference.orderByChild("id").equalTo(idPreguntaD)
+        val query:Query = preguntasReference.orderByChild("id").equalTo(idPregunta.toDouble())
 
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                val valuePregunta:DataSnapshot = dataSnapshot.child("Pregunta"+idPregunta)
+                val valuePregunta:DataSnapshot = dataSnapshot.child("Pregunta$idPregunta")
                 val txtPregunta = valuePregunta.child("txtPregunta").value.toString()
 
                 LPregunta.text=txtPregunta
@@ -117,19 +120,17 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun pasarPreguntas() {
-            //TODO
-        /*
+    private fun pasarPreguntas() {
         val preguntasSiguientes = IntArray(preguntas.size - 1)
         if (preguntas.size > 1) {
             for (i in 1 until preguntas.size) {
                 preguntasSiguientes[i - 1] = preguntas[i]
             }
             val intent = Intent(this, PreguntaActivity::class.java)
-            intent.putExtra(PREGUNTAS, preguntasSiguientes)
+            intent.putExtra(EscogerGrupoActivity.Constants.PREGUNTAS, preguntasSiguientes)
             startActivity(intent)
             finish()
-        }*/
+        }
     }
 
 }

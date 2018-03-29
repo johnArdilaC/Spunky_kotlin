@@ -14,6 +14,11 @@ import kotlinx.android.synthetic.main.activity_escoger_grupo.*
 
 class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
+
+    object Constants{
+        val PREGUNTAS = "com.ppg.spunky.PREGUNTAS"
+    }
+
     //Firebase vars
     private val mRootDB: FirebaseDatabase = FirebaseDatabase.getInstance()
 
@@ -73,7 +78,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
      * Deshabilitar las cards que no sean la actual
      */
     private fun disableElse(thecard: CheckableCardView){
-        println("Disabling all but " + thecard)
+        println("Disabling all but  $thecard")
         groupView.forEach {
             if(it.id!=thecard.id){
                 it.isSelected=false
@@ -200,22 +205,28 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
                 println("preguntas totales en grupo "+preguntasTotales.toString())
 
                 preguntasAptas = preguntasTotales.distinct().toMutableList()
+                val preguntasFinales = IntArray(preguntasAptas.size)
+                for (j in preguntasAptas.indices) {
+
+                    preguntasFinales[j] = preguntasAptas[j].toInt()
+                }
+                println("total APTAS  $preguntasAptas")
+                println("total Finales $preguntasFinales")
+
+                launchNextActivity(preguntasFinales)
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 println("loadPost:onCancelled ${databaseError.toException()}")
             }
         }
-
         gruposReference.addValueEventListener(gruposListener)
-
-        println("total APTAS  "  + preguntasAptas)
-
-        siguiente()
     }
 
-    private fun siguiente()
+    private fun launchNextActivity(preguntas: IntArray)
     {
         val intent = Intent(this, PreguntaActivity::class.java)
+        intent.putExtra(Constants.PREGUNTAS,preguntas)
+
         startActivity(intent)
     }
 
