@@ -1,5 +1,6 @@
 package com.ppg.spunky_kotlin
 
+import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.DialogInterface
@@ -27,22 +28,24 @@ class ElegirJuegoActivity : AppCompatActivity() {
 
     private var preguntas: IntArray = intArrayOf()
 
+    //Atributo que indica si hay conexión
+    private var isConnected: Boolean = false
+    private val REQUEST_ENABLE_BT = 1
+    private var changeReceiver: NetworkChangeReceiver? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_elegir_juego)
 
         preguntas = intent.getIntArrayExtra(EscogerGrupoActivity.Constants.PREGUNTAS)
-        println("PREGUNTASSSSSS ELEGIR JUEGO   $preguntas")
-
 
         btnsJugar = arrayOf(btn_jugarCharadas,btn_jugarTrivia,btn_jugarVerdad)
 
         if (Build.VERSION.SDK_INT >= 21) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
-        // layouts of all welcome sliders
-        // add few more layouts if you want
+
         layouts = intArrayOf(R.layout.charadas, R.layout.trivia, R.layout.verdad)
 
         addBottomDots(0)
@@ -56,12 +59,12 @@ class ElegirJuegoActivity : AppCompatActivity() {
                 // checking for last page
                 // if last page home screen will be launched
                 val current = getItem(+1)
-                //verificarConexion()
+                verificarConexion()
                // if (current < layouts.size && isConnected) {
                 if (current < layouts.size) {
                     launchNextActivity()
                 }
-                /*else if (!isConnected) {
+                else if (!isConnected) {
                     val builder = AlertDialog.Builder(this@ElegirJuegoActivity)
                     builder.setMessage(R.string.label_conexion)
                             .setTitle(R.string.label_informacion)
@@ -73,14 +76,12 @@ class ElegirJuegoActivity : AppCompatActivity() {
                                 } else if (!mBluetoothAdapter.isEnabled) {
                                     val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                                     startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
-                                } else if (!mBluetoothAdapter.isEnabled) {
-
                                 }
                             })
                             .setNeutralButton(R.string.button_volver, DialogInterface.OnClickListener { dialog, id -> })
                     val dialog = builder.create()
                     dialog.show()
-                }*/
+                }
                 else {
 
                 }
@@ -188,5 +189,35 @@ class ElegirJuegoActivity : AppCompatActivity() {
         intent.putExtra(EscogerGrupoActivity.Constants.PREGUNTAS, preguntas)
         startActivity(intent)
         finish()
+    }
+
+    /**
+     * Conectividad
+     */
+
+
+    private fun irABluetoothActivity() {
+        startActivity(Intent(this, JugadoresBluetoothActivity::class.java))
+        finish()
+    }
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        when (requestCode) {
+            REQUEST_ENABLE_BT -> if (resultCode == Activity.RESULT_OK) {
+                println("ACEPTO")
+                irABluetoothActivity()
+            } else {
+                // User did not enable Bluetooth or an error occurred
+                println("NO ACEPTO")
+            }
+
+            else -> super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    private fun verificarConexion() {
+
+        isConnected = changeReceiver?.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED
+
     }
 }

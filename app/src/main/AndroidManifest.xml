@@ -37,7 +37,9 @@
         <activity android:name=".EnConstruccionActivity" />
         <activity android:name=".Carousel" />
         <activity android:name=".PreguntaActivity" />
-        <activity android:name=".ElegirJuegoActivity"></activity>
+        <activity android:name=".ElegirJuegoActivity" />
+        <activity android:name=".JugadoresBluetoothActivity" />
+        <activity android:name=".AnadirJugadoresActivity"></activity>
     </application>
 
 </manifest>

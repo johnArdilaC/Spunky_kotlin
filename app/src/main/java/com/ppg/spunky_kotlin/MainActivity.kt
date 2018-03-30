@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
 
     private fun test()
     {
-        val intent = Intent(this, TestCheckable::class.java)
+        val intent = Intent(this, ElegirJuegoActivity::class.java)
         startActivity(intent)
     }
 

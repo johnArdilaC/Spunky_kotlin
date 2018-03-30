@@ -60,5 +60,12 @@
     <string name="verdad_desc">¿Te atreves?</string>
     <string name="button_volver">Volver</string>
 
+    <string name="label_conexion">En este momento no tienes conexión a internet. Puedes agregar a tus amigos por Bluetooth o encender tu conexión a internet.</string>
+    <string name="button_bluetooth">Usar bluetooth</string>
+    <string name="label_bluetooth">Tu dispositivo no soporta Bluetooth, intenta conectarte nuevamente utilizando internet.</string>
+
+    <string name="label_compartir">¡Comparte el código de tu juego!</string>
+    <string name="buttonJugarYA">Empezar</string>
+
 
 </resources>
