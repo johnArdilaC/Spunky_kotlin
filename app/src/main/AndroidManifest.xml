@@ -39,7 +39,8 @@
         <activity android:name=".PreguntaActivity" />
         <activity android:name=".ElegirJuegoActivity" />
         <activity android:name=".JugadoresBluetoothActivity" />
-        <activity android:name=".AnadirJugadoresActivity"></activity>
+        <activity android:name=".AnadirJugadoresActivity" />
+        <activity android:name=".UnirseActivity"></activity>
     </application>
 
 </manifest>

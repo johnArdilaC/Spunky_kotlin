@@ -265,7 +265,7 @@
         android:layout_marginEnd="39dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorBackground"
+        android:background="@color/colorPrimaryDark"
         android:fontFamily="@font/cabin"
         android:text="@string/button_siguiente"
         android:textSize="50sp"

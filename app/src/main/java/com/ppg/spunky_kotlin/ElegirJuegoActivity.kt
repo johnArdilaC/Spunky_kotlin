@@ -92,7 +92,6 @@ class ElegirJuegoActivity : AppCompatActivity() {
     }
 
     private fun addBottomDots(currentPage: Int) {
-        //initialize array with sizeTODO
         dots= arrayOfNulls(layouts.size)
 
         val colorsActive = resources.getIntArray(R.array.array_dot_active)

@@ -67,5 +67,8 @@
     <string name="label_compartir">¡Comparte el código de tu juego!</string>
     <string name="buttonJugarYA">Empezar</string>
 
+    <string name="txt_unirse">¿Cuál es tu apodo?</string>
+    <string name="txt_codigo">Escribe el código del juego</string>
+    <string name="button_unirme">Unirme</string>
 
 </resources>

@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
             R.id.button1 -> escogerGrupo()
             R.id.btn_sign_out -> signOut()
             R.id.button2 -> crearJuego()
-            R.id.button3 -> test()
+            R.id.button3 -> unirse()
         }
     }
 
@@ -81,9 +81,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
         startActivity(intent)
     }
 
-    private fun test()
+    private fun unirse()
     {
-        val intent = Intent(this, ElegirJuegoActivity::class.java)
+        val intent = Intent(this, UnirseActivity::class.java)
         startActivity(intent)
     }
 

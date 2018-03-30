@@ -172,7 +172,6 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
      * Inicializa las preguntas dado el grupo y las edades escogidas
      */
     private fun initGrupos() {
-        println("is checked2.5")
 
         //Añadir preguntas compatibles con edad
         val edadesListener = object : ValueEventListener {
@@ -184,7 +183,6 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
                     val idStringArray = hijo.child("preguntas").value.toString().replace("{","").replace("}","").split(",")
 
                     idStringArray.forEach { preguntasTotales.add(Integer(Integer.valueOf(it))) }
-                    println("is checked3")
 
                 }
             }
@@ -229,9 +227,8 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
     private fun launchNextActivity(preguntas: IntArray)
     {
-        val intent = Intent(this, ElegirJuegoActivity::class.java)
+        val intent = Intent(this, AnadirJugadoresActivity::class.java)
         intent.putExtra(Constants.PREGUNTAS,preguntas)
-        println("whaaaaaaaaaaaaaaat")
         startActivity(intent)
     }
 
