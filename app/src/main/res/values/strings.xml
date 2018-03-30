@@ -44,6 +44,21 @@
     <string name="label_incorrecto">Respuesta incorrecta</string>
     <string name="label_Mpuntos">¡Incorrecto! No ganaste ningún punto</string>
     <string name="label_correcto">Respuesta correcta</string>
+    <string name="jugar_charadas">Jugar charadas</string>
+    <string name="jugar_trivia">Jugar Trivia</string>
+    <string name="jugar_verdad">Jugar verdad</string>
+
+    <string name="label_ronda">Ronda 1</string>
+
+    <string name="charadas_title">¡Charadas!</string>
+    <string name="charadas_desc">Piensa, imita, dibuja y adivina la palabra</string>
+
+    <string name="trivia_title">¡Trivia!</string>
+    <string name="trivia_desc">Pon a funcionar tu cerebro y contesta la pregunta. Ya veremos si eres un sabelotodo </string>
+
+    <string name="verdad_title">¡Verdad o reto!</string>
+    <string name="verdad_desc">¿Te atreves?</string>
+    <string name="button_volver">Volver</string>
 
 
 </resources>

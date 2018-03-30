@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-
     override fun onClick(v: View?) {
         val i = v!!.id
 

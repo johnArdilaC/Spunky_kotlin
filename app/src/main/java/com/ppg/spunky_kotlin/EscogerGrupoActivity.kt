@@ -224,7 +224,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
     private fun launchNextActivity(preguntas: IntArray)
     {
-        val intent = Intent(this, PreguntaActivity::class.java)
+        val intent = Intent(this, ElegirJuegoActivity::class.java)
         intent.putExtra(Constants.PREGUNTAS,preguntas)
 
         startActivity(intent)

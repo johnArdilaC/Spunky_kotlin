@@ -36,7 +36,8 @@
         <activity android:name=".TestCheckable" />
         <activity android:name=".EnConstruccionActivity" />
         <activity android:name=".Carousel" />
-        <activity android:name=".PreguntaActivity"></activity>
+        <activity android:name=".PreguntaActivity" />
+        <activity android:name=".ElegirJuegoActivity"></activity>
     </application>
 
 </manifest>

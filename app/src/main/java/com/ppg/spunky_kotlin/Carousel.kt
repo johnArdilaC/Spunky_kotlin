@@ -14,7 +14,7 @@ class Carousel : AppCompatActivity(), View.OnClickListener {
 
 
     lateinit var mPager: ViewPager
-    var path: IntArray = intArrayOf(R.drawable.trivia,R.drawable.verdad, R.drawable.charada)
+    var path: IntArray = intArrayOf(R.drawable.trivia,R.drawable.verdad, R.drawable.charadas)
     //var btn = findViewById<Button>(R.id.btnjugar) as Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
