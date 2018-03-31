@@ -71,4 +71,9 @@
     <string name="txt_codigo">Escribe el código del juego</string>
     <string name="button_unirme">Unirme</string>
 
+    <string name="label_id_error">El id ingresado no corresponde con un juego en curso</string>
+    <string name="title_error">Error</string>
+    <string name="label_apodo">¿Cuál es tu apodo?</string>
+    <string name="label_escribir_codigo">Escribe el código del juego</string>
+
 </resources>

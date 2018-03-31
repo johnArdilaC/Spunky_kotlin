@@ -1,14 +1,18 @@
 package com.ppg.spunky_kotlin
 
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.View
 import com.google.firebase.database.*
 import com.ppg.spunky_kotlin.cardview.CheckableCardView
+import kotlinx.android.synthetic.main.activity_anadir_jugadores.*
 import kotlinx.android.synthetic.main.activity_pregunta.*
+import kotlinx.android.synthetic.main.checkable_card_view.*
 
 class PreguntaActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -20,6 +24,9 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener {
 
     private var preguntas:IntArray = intArrayOf()
 
+    private var prefs: SharedPreferences?=null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pregunta)
@@ -29,40 +36,14 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener {
 
         opciones = arrayOf(card_a,card_b,card_c,card_d)
         opciones.forEach { it.setOnClickListener(this) }
-        initPreguntas(preguntas[0])
+
+        prefs = applicationContext.getSharedPreferences(EscogerGrupoActivity.Constants.PREFS_FILENAME, Context.MODE_PRIVATE)
+
+        //initPreguntas(preguntas[0]) -> ¿Vale la pena hacerlo con conexion cuando se puede facilmente desde
+        //shared preferences y no está haciento peticiones a la BD en cada activity?
+        initPreguntaNoConn(preguntas[0])
     }
 
-    /**
-     * Busca la pregunta en la base de datos e inicializa los textos de la pregunta y las respuestas
-     */
-    private fun initPreguntas(idPregunta:Int){
-
-        val query:Query = preguntasReference.orderByChild("id").equalTo(idPregunta.toDouble())
-
-        query.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                val valuePregunta:DataSnapshot = dataSnapshot.child("Pregunta$idPregunta")
-                val txtPregunta = valuePregunta.child("txtPregunta").value.toString()
-
-                LPregunta.text=txtPregunta
-
-                //Guardar el resultado como hash para hacer mas facil el acceso a los datos
-                val opciones = valuePregunta.child("opciones").value as HashMap<String,Any>
-
-                card_a.text=opciones["a"].toString()
-                card_b.text=opciones["b"].toString()
-                card_c.text=opciones["c"].toString()
-                card_d.text=opciones["d"].toString()
-                correcta=opciones["correcta"].toString()
-
-                println("opciones "+opciones.values)
-            }
-            override fun onCancelled(databaseError: DatabaseError) {
-                println("loadPost:onCancelled ${databaseError.toException()}")
-            }
-        })
-    }
 
     override fun onClick(v: View?) {
         val i = v!!.id
@@ -130,6 +111,68 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener {
             intent.putExtra(EscogerGrupoActivity.Constants.PREGUNTAS, preguntasSiguientes)
             startActivity(intent)
             finish()
+        }
+    }
+
+
+    /**
+     * Busca la pregunta en la base de datos e inicializa los textos de la pregunta y las respuestas, con conexion
+     */
+    private fun initPreguntas(idPregunta:Int){
+
+        val query:Query = preguntasReference.orderByChild("id").equalTo(idPregunta.toDouble())
+
+        query.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                val valuePregunta:DataSnapshot = dataSnapshot.child("Pregunta$idPregunta")
+                val txtPregunta = valuePregunta.child("txtPregunta").value.toString()
+
+                LPregunta.text=txtPregunta
+
+                //Guardar el resultado como hash para hacer mas facil el acceso a los datos
+                val opciones = valuePregunta.child("opciones").value as HashMap<String,Any>
+
+                card_a.text=opciones["a"].toString()
+                card_b.text=opciones["b"].toString()
+                card_c.text=opciones["c"].toString()
+                card_d.text=opciones["d"].toString()
+                correcta=opciones["correcta"].toString()
+
+                println("opciones "+opciones.values)
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                println("loadPost:onCancelled ${databaseError.toException()}")
+            }
+        })
+    }
+
+    /**
+     * Sin conexion
+     */
+    private fun initPreguntaNoConn(idPregunta: Int){
+        val default:Set<String> = hashSetOf("No se encontró nada", "quizas si")
+
+        var setPregunta: Set<String> =  prefs!!.getStringSet("Pregunta$idPregunta",default)
+
+        var id:String
+        var textCard:String
+
+        setPregunta.forEach{
+            val textList=it.split("=")
+            if(textList.size>1){
+                id=textList[0]
+                textCard=textList[1]
+
+                when(id){
+                    "a" -> card_a.text=textCard
+                    "b" -> card_b.text=textCard
+                    "c" -> card_c.text=textCard
+                    "correcta" -> correcta=textCard
+                }
+            }
+            else
+                LPregunta.text=textList[0]
         }
     }
 

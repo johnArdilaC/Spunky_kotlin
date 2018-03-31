@@ -1,11 +1,17 @@
 package com.ppg.spunky_kotlin
 
+import android.bluetooth.BluetoothAdapter
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.support.v4.app.INotificationSideChannel
 
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.View
 
 import com.google.firebase.database.*
@@ -17,6 +23,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
     object Constants{
         val PREGUNTAS = "com.ppg.spunky.PREGUNTAS"
+        val PREFS_FILENAME = "com.ppg.spunky.prefs"
     }
 
     //Firebase vars
@@ -24,6 +31,8 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
     private val gruposReference: DatabaseReference = mRootDB.reference.child("Grupos")
     private val edadesReference: DatabaseReference = mRootDB.reference.child("Edades")
+    private val preguntasReference: DatabaseReference = mRootDB.reference.child("Juegos").child("PreguntasTrivia")
+
 
     private var grupoSeleccionado:String = ""
     private var edadesSeleccionadas:Array<String> = arrayOf()
@@ -32,6 +41,14 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
     private var groupView:Array<CheckableCardView> = arrayOf()
     private var ageView:Array<CheckableCardView> = arrayOf()
+
+    private var prefs: SharedPreferences? = null
+    private var prefsBD: SharedPreferences? = null
+
+    //Atributo que indica si hay conexión
+    private var isConnected: Boolean = false
+    private val REQUEST_ENABLE_BT = 1
+    private var changeReceiver: NetworkChangeReceiver = NetworkChangeReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +60,11 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         groupView.forEach { it.setOnClickListener(this) }
 
         siguiente.setOnClickListener(this)
+
+        //Shared preferences
+        prefs = applicationContext.getSharedPreferences(Constants.PREFS_FILENAME, Context.MODE_PRIVATE)
+        prefsBD = applicationContext.getSharedPreferences(MainActivity.Constants.PREGUNTAS_BD, Context.MODE_PRIVATE)
+
     }
 
     /**
@@ -67,7 +89,6 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
     private fun unToggle(thecard: CheckableCardView)
     {
         if(thecard.isChecked){
-        println("untoggle")
         disableElse(thecard)
         }
         else
@@ -78,13 +99,11 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
      * Deshabilitar las cards que no sean la actual
      */
     private fun disableElse(thecard: CheckableCardView){
-        println("Disabling all but  $thecard")
         groupView.forEach {
             if(it.id!=thecard.id){
                 it.isSelected=false
                 it.isChecked=false
                 it.isEnabled=false
-                println(" Disabled "+ it.toString())
             }
         }
     }
@@ -93,7 +112,6 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
      * Habilitar las cards que no sean el actual
      */
     private fun enableElse(thecard: CheckableCardView){
-        println("Enabling all but " + thecard)
 
         groupView.forEach {
             if(it.id!=thecard.id){
@@ -112,37 +130,40 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
         //Una card seleccionada
         if(groupView.any { it.isChecked }){
-            println("is checked")
             grupoSeleccionado=findCheckedGroup()
 
             if(ageView.any { it.isChecked }){
                 edadesSeleccionadas = findCheckedAges()
-                println("is checked2")
 
-                initGrupos()
+                //Verificar si hay conexion para inicializar grupos o preguntas
+                isConnected = !(changeReceiver.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED)
+
+                if(isConnected){
+                    initGrupos()
+                }
+                else{
+                    initGruposNoConn()
+                }
             }
 
             //No hay edad seleccionada
             else{
-                val builder = AlertDialog.Builder(this@EscogerGrupoActivity)
-                builder.setMessage(R.string.label_edades_completar)
-                        .setTitle(R.string.label_informacion)
-                        .setPositiveButton(R.string.button_ok, DialogInterface.OnClickListener { dialog, id -> })
-                val dialog = builder.create()
-                dialog.show()
+                showAlertDialog(R.string.label_edades_completar,R.string.label_informacion)
             }
-
-
         }
-        //Error porque no hay grupo seleccionado
+        //No hay grupo seleccionado
         else{
-            val builder = AlertDialog.Builder(this@EscogerGrupoActivity)
-            builder.setMessage(R.string.label_completar)
-                    .setTitle(R.string.label_informacion)
-                    .setPositiveButton(R.string.button_ok, DialogInterface.OnClickListener { dialog, id -> })
-            val dialog = builder.create()
-            dialog.show()
+            showAlertDialog(R.string.label_completar,R.string.label_informacion)
         }
+
+    }
+    private fun showAlertDialog(msg:Int,title:Int) {
+        val builder = AlertDialog.Builder(this@EscogerGrupoActivity)
+        builder.setMessage(msg)
+                .setTitle(title)
+                .setPositiveButton(R.string.button_ok, DialogInterface.OnClickListener { dialog, id -> })
+        val dialog = builder.create()
+        dialog.show()
 
     }
 
@@ -152,7 +173,8 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         groupView.forEach {
             if(it.isChecked){
                 checkedGroup=it.text
-                }
+                return checkedGroup
+            }
         }
         return checkedGroup
     }
@@ -167,6 +189,10 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         }
         return checkedAges
     }
+
+    /**
+     *-------------------- Inicializar cosas con conexion------------------
+     */
 
     /**
      * Inicializa las preguntas dado el grupo y las edades escogidas
@@ -216,7 +242,8 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
                 println("total APTAS  $preguntasAptas")
                 println("total Finales $preguntasFinales")
 
-                launchNextActivity(preguntasFinales)
+                //Guardar preguntas en shared preferences
+                saveQuestionsSP(preguntasFinales)
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 println("loadPost:onCancelled ${databaseError.toException()}")
@@ -225,11 +252,126 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         gruposReference.addValueEventListener(gruposListener)
     }
 
+
+    /**
+     * Busca la pregunta en la base de datos e inicializa los textos de la pregunta y las respuestas
+     */
+    private fun initPreguntas(idPregunta:Int){
+
+        var setPregunta:Set<String> = hashSetOf()
+        val query:Query = preguntasReference.orderByChild("id").equalTo(idPregunta.toDouble())
+
+
+        val editor = prefs!!.edit()
+
+        editor.clear()
+        editor.commit()
+
+        query.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                val valuePregunta:DataSnapshot = dataSnapshot.child("Pregunta$idPregunta")
+                val txtPregunta = valuePregunta.child("txtPregunta").value.toString()
+
+                setPregunta += txtPregunta
+
+                //Guardar el resultado como hash para hacer mas facil el acceso a los datos
+                val opciones = valuePregunta.child("opciones").value as HashMap<String,Any>
+
+                for (i in opciones){
+                    setPregunta+=i.toString()
+                }
+
+                println("Set pregunta $idPregunta $setPregunta")
+
+                editor.putStringSet("Pregunta$idPregunta", setPregunta)
+                editor.commit()
+
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                println("loadPost:onCancelled ${databaseError.toException()}")
+            }
+        })
+    }
+
+    /**
+     *-------------------- Inicializar cosas sin conexion------------------
+     */
+
+
+    /**
+     * Inicializa grupos o preguntas dado si hay conexion o no
+     */
+    private fun saveQuestionsSP(preguntas: IntArray){
+        if(isConnected)     preguntas.forEach { initPreguntas(it) }
+        else    preguntas.forEach { initPreguntasNoConn(it) }
+
+        launchNextActivity(preguntas)
+    }
+
+    /**
+     * Trae grupos del shared preferences
+     */
+    private fun initGruposNoConn(){
+
+        val default = "No se encontró nada"
+
+        edadesSeleccionadas.forEach {
+
+            var test: String =  prefsBD!!.getString(it,default)
+            println("test 1 anadir $test")
+
+            val idStringArray = test.replace("{","").replace("}","").split(",")
+
+            idStringArray.forEach { preguntasTotales.add(Integer(Integer.valueOf(it))) }
+
+        }
+
+        //Traer las preguntas segun grupo
+        var test: String =  prefsBD!!.getString(grupoSeleccionado,default)
+        println("test 1 anadir $test")
+
+        val idStringArray = test.replace("{","").replace("}","").split(",")
+
+        idStringArray.forEach { preguntasTotales.add(Integer(Integer.valueOf(it))) }
+
+        //Definir preguntas aptas
+        preguntasAptas = preguntasTotales.distinct().toMutableList()
+        val preguntasFinales = IntArray(preguntasAptas.size)
+        for (j in preguntasAptas.indices) {
+
+            preguntasFinales[j] = preguntasAptas[j].toInt()
+        }
+        println("total APTAS  NO CONN $preguntasAptas")
+        println("total Finales NO CON $preguntasFinales")
+
+        //Guardar preguntas en shared preferences
+        saveQuestionsSP(preguntasFinales)
+
+    }
+
+    private fun initPreguntasNoConn(idPregunta:Int){
+
+        val default:Set<String> = hashSetOf("No se encontró la pregunta")
+
+        val editor = prefs!!.edit()
+        editor.clear()
+
+        val setPregunta: Set<String> =  prefsBD!!.getStringSet("Pregunta$idPregunta",default)
+
+        Log.e("Pregunta $idPregunta no conn", setPregunta.toString() )
+
+        editor.putStringSet("Pregunta$idPregunta", setPregunta)
+        editor.commit()
+    }
+
+
     private fun launchNextActivity(preguntas: IntArray)
     {
-        val intent = Intent(this, AnadirJugadoresActivity::class.java)
+        val intent = Intent(this, ElegirJuegoActivity::class.java)
         intent.putExtra(Constants.PREGUNTAS,preguntas)
         startActivity(intent)
     }
+
 
 }

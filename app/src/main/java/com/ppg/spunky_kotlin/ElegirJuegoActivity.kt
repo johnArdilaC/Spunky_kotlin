@@ -12,6 +12,7 @@ import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,7 @@ class ElegirJuegoActivity : AppCompatActivity() {
     //Atributo que indica si hay conexión
     private var isConnected: Boolean = false
     private val REQUEST_ENABLE_BT = 1
-    private var changeReceiver: NetworkChangeReceiver? = null
+    private var changeReceiver: NetworkChangeReceiver = NetworkChangeReceiver()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,30 +60,35 @@ class ElegirJuegoActivity : AppCompatActivity() {
                 // checking for last page
                 // if last page home screen will be launched
                 val current = getItem(+1)
-                verificarConexion()
-               // if (current < layouts.size && isConnected) {
-                if (current < layouts.size) {
-                    launchNextActivity()
+
+                isConnected = !(changeReceiver.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED)
+
+                if (current < layouts.size && isConnected) {
+                        launchNextActivity()
+
                 }
                 else if (!isConnected) {
                     val builder = AlertDialog.Builder(this@ElegirJuegoActivity)
                     builder.setMessage(R.string.label_conexion)
                             .setTitle(R.string.label_informacion)
                             .setPositiveButton(R.string.button_bluetooth, DialogInterface.OnClickListener { dialog, id ->
-                                val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+                                val mBluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
                                 if (mBluetoothAdapter == null) {
                                     // Device does not support Bluetooth
                                     crearMensaje(R.string.label_bluetooth)
                                 } else if (!mBluetoothAdapter.isEnabled) {
+                                    Log.e("BT Adapter", mBluetoothAdapter.toString())
                                     val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                                    Log.e("BT Adapter", enableBtIntent.toString())
                                     startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
+                                } else if (mBluetoothAdapter.isEnabled) {
+                                    irABluetoothActivity()
                                 }
                             })
                             .setNeutralButton(R.string.button_volver, DialogInterface.OnClickListener { dialog, id -> })
                     val dialog = builder.create()
                     dialog.show()
-                }
-                else {
+                } else {
 
                 }
             }
@@ -184,7 +190,7 @@ class ElegirJuegoActivity : AppCompatActivity() {
     }
 
     private fun launchNextActivity() {
-        val intent = Intent(this, PreguntaActivity::class.java)
+        val intent = Intent(this, AnadirJugadoresActivity::class.java)
         intent.putExtra(EscogerGrupoActivity.Constants.PREGUNTAS, preguntas)
         startActivity(intent)
         finish()
@@ -200,23 +206,17 @@ class ElegirJuegoActivity : AppCompatActivity() {
         finish()
     }
 
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        when (requestCode) {
-            REQUEST_ENABLE_BT -> if (resultCode == Activity.RESULT_OK) {
-                println("ACEPTO")
-                irABluetoothActivity()
-            } else {
-                // User did not enable Bluetooth or an error occurred
-                println("NO ACEPTO")
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         when (requestCode) {
+                REQUEST_ENABLE_BT -> if (resultCode == Activity.RESULT_OK) {
+                    println("ACEPTO")
+                    irABluetoothActivity()
+                } else {
+                    // User did not enable Bluetooth or an error occurred
+                    println("NO ACEPTO")
+                }
+                else -> super.onActivityResult(requestCode, resultCode, data)
             }
+  }
 
-            else -> super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
-
-    private fun verificarConexion() {
-
-        isConnected = changeReceiver?.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED
-
-    }
 }

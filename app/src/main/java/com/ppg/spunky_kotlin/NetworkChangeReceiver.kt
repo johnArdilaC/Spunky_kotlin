@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
+import android.util.Log
 
 /**
  * Created by mariapc on 29/03/18.
@@ -39,7 +40,7 @@ class NetworkChangeReceiver : BroadcastReceiver() {
         when(conn){
             TYPE_WIFI -> status= NETWORK_STAUS_WIFI
             TYPE_MOBILE -> status = NETWORK_STATUS_MOBILE
-            TYPE_NOT_CONNECTED -> NETWORK_STATUS_NOT_CONNECTED
+            TYPE_NOT_CONNECTED -> status= NETWORK_STATUS_NOT_CONNECTED
         }
 
         return status
@@ -48,8 +49,11 @@ class NetworkChangeReceiver : BroadcastReceiver() {
     private fun getConnectivityStatus(context: Context): Int {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
+
+
         val activeNetwork = cm.activeNetworkInfo
         if (null != activeNetwork) {
+
             if (activeNetwork.type == ConnectivityManager.TYPE_WIFI)
                 return TYPE_WIFI
 

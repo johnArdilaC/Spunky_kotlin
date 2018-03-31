@@ -1,6 +1,8 @@
 package com.ppg.spunky_kotlin
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +15,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -28,6 +31,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
     private val WEB_CLIENT_ID = "155855972528-bud5be7j2uo4lhdjh19s64higd1mvlnb.apps.googleusercontent.com"
     private var mAuth: FirebaseAuth? = null
 
+    private val mRootDB: FirebaseDatabase = FirebaseDatabase.getInstance()
+
+    private val gruposReference: DatabaseReference = mRootDB.reference.child("Grupos")
+    private val edadesReference: DatabaseReference = mRootDB.reference.child("Edades")
+    private val preguntasReference: DatabaseReference = mRootDB.reference.child("Juegos").child("PreguntasTrivia")
+
+
+    object Constants{
+        val PREGUNTAS_BD = "com.ppg.spunky.prefs_DB"
+    }
+
+    private var prefsBD: SharedPreferences? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,6 +54,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
         button2.setOnClickListener(this)
         button3.setOnClickListener(this)
 
+        prefsBD = applicationContext.getSharedPreferences(Constants.PREGUNTAS_BD, Context.MODE_PRIVATE)
+
+        val editor = prefsBD!!.edit()
+
+        guardarEdades(editor)
+        guardarGrupos(editor)
+        guardarPreguntas(editor)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(WEB_CLIENT_ID)
@@ -154,8 +177,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-
-
             btn_sign_in.visibility = View.GONE
             btn_sign_out.visibility = View.VISIBLE
 
@@ -166,6 +187,83 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
 
         }
     }
+
+    /**
+     * Traer preguntas, grupos y edades y guardarlos en shared preferences
+     */
+    private fun guardarEdades(editor:SharedPreferences.Editor){
+        //Añadir preguntas compatibles con edad
+        val edadesListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                dataSnapshot.children.forEach {
+                    //Obtener el tipo de edad
+                    val edad:String =it.key
+                    val preguntas = it.child("preguntas").value.toString()
+                    editor.putString(edad, preguntas)
+                    editor.commit()
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                println("loadPost:onCancelled ${databaseError.toException()}")
+            }
+        }
+        edadesReference.addValueEventListener(edadesListener)
+    }
+
+    private fun guardarGrupos(editor:SharedPreferences.Editor){
+        //Añadir preguntas compatibles con grupos
+        val gruposListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+
+
+                dataSnapshot.children.forEach {
+                    //Obtener el tipo de grupo
+                    val grupo:String =it.key
+                    val preguntas = it.child("preguntas").value.toString()
+                    editor.putString(grupo, preguntas)
+                    editor.commit()
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                println("loadPost:onCancelled ${databaseError.toException()}")
+            }
+        }
+        gruposReference.addValueEventListener(gruposListener)
+
+    }
+
+    private fun guardarPreguntas(editor:SharedPreferences.Editor){
+        var setPregunta:Set<String> = hashSetOf()
+
+        //Añadir preguntas compatibles con edad
+        val preguntasListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                for(i in 1 until 11){
+                    val pregunta:DataSnapshot = dataSnapshot.child("Pregunta$i")
+                    val txtPregunta = pregunta.child("txtPregunta").value.toString()
+
+                    setPregunta += txtPregunta
+
+                    //Guardar el resultado como hash para hacer mas facil el acceso a los datos
+                    val opciones = pregunta.child("opciones").value as HashMap<String,Any>
+
+                    for (i in opciones){
+                        setPregunta+=i.toString()
+                    }
+
+                    editor.putStringSet("Pregunta$i", setPregunta)
+                    editor.commit()
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                println("loadPost:onCancelled ${databaseError.toException()}")
+            }
+        }
+        preguntasReference.addValueEventListener(preguntasListener)
+    }
+
 
 
 

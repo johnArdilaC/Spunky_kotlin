@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ppg.spunky_kotlin.EscogerGrupoActivity"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    >
+    tools:context="com.ppg.spunky_kotlin.EscogerGrupoActivity">
 
 
     <TextView
@@ -55,13 +54,13 @@
             android:layout_marginRight="16dp"
             android:layout_rowWeight="1"
             android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@android:color/holo_blue_dark"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/holo_blue_dark"
 
             card_view:card_background="blue"
-            card_view:card_text="@string/button_amigos"
-            card_view:card_image="@drawable/amigos">
+            card_view:card_image="@drawable/amigos"
+            card_view:card_text="@string/button_amigos">
 
         </com.ppg.spunky_kotlin.cardview.CheckableCardView>
 
@@ -77,12 +76,12 @@
             android:layout_marginRight="16dp"
             android:layout_rowWeight="1"
             android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@drawable/green"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="@drawable/green"
             card_view:card_background="green"
-            card_view:card_text="@string/button_familia"
-            card_view:card_image="@drawable/familia">
+            card_view:card_image="@drawable/familia"
+            card_view:card_text="@string/button_familia">
 
         </com.ppg.spunky_kotlin.cardview.CheckableCardView>
 
@@ -101,13 +100,13 @@
             android:layout_marginRight="16dp"
             android:layout_rowWeight="1"
             android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@android:color/holo_orange_dark"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="@android:color/holo_orange_dark"
 
             card_view:card_background="orange"
-            card_view:card_text="@string/button_trabajo"
-            card_view:card_image="@drawable/trabajo">
+            card_view:card_image="@drawable/trabajo"
+            card_view:card_text="@string/button_trabajo">
 
         </com.ppg.spunky_kotlin.cardview.CheckableCardView>
 
@@ -126,8 +125,8 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
             card_view:card_background="red"
-            card_view:card_text="@string/button_desconocidos"
-            card_view:card_image="@drawable/desconocidos">
+            card_view:card_image="@drawable/desconocidos"
+            card_view:card_text="@string/button_desconocidos">
 
         </com.ppg.spunky_kotlin.cardview.CheckableCardView>
 
@@ -136,10 +135,10 @@
     <TextView
         android:id="@+id/textView9"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginEnd="45dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/cabin"
         android:text="@string/label_tipo_edad"
         android:textColor="@color/colorBlack"
@@ -151,11 +150,11 @@
 
     <GridLayout
         android:id="@+id/ageGrid"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="390dp"
         android:layout_marginEnd="40dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="49dp"
         android:layout_weight="8"
         android:alignmentMode="alignMargins"
         android:columnCount="2"
@@ -163,6 +162,7 @@
         android:padding="0dp"
         android:rowCount="2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9">
 
@@ -183,8 +183,8 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
             card_view:card_background="green"
-            card_view:card_text="@string/text_menores"
-            card_view:card_image="@drawable/menores">
+            card_view:card_image="@drawable/menores"
+            card_view:card_text="@string/text_menores">
 
 
         </com.ppg.spunky_kotlin.cardview.CheckableCardView>
@@ -200,13 +200,13 @@
             android:layout_marginRight="16dp"
             android:layout_rowWeight="1"
             android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@android:color/holo_blue_dark"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
-            app:cardBackgroundColor="@android:color/holo_blue_dark"
 
             card_view:card_background="blue"
-            card_view:card_text="@string/text_jovenes"
-            card_view:card_image="@drawable/jovenes">
+            card_view:card_image="@drawable/jovenes"
+            card_view:card_text="@string/text_jovenes">
 
         </com.ppg.spunky_kotlin.cardview.CheckableCardView>
 
@@ -224,13 +224,13 @@
             android:layout_marginRight="16dp"
             android:layout_rowWeight="1"
             android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@android:color/holo_red_dark"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
             card_view:card_background="red"
-            app:cardBackgroundColor="@android:color/holo_red_dark"
 
-            card_view:card_text="@string/text_adultos"
-            card_view:card_image="@drawable/adultos">
+            card_view:card_image="@drawable/adultos"
+            card_view:card_text="@string/text_adultos">
 
         </com.ppg.spunky_kotlin.cardview.CheckableCardView>
 
@@ -245,13 +245,13 @@
             android:layout_marginRight="16dp"
             android:layout_rowWeight="1"
             android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@android:color/holo_orange_dark"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
-            app:cardBackgroundColor="@android:color/holo_orange_dark"
 
             card_view:card_background="orange"
-            card_view:card_text="@string/text_mayores"
-            card_view:card_image="@drawable/mayores">
+            card_view:card_image="@drawable/mayores"
+            card_view:card_text="@string/text_mayores">
 
         </com.ppg.spunky_kotlin.cardview.CheckableCardView>
 
@@ -271,9 +271,10 @@
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ageGrid"
-        />
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -76,7 +76,6 @@ public class CheckableCardView  extends CardView implements Checkable {
                     String txtimage=image.split("/")[2];
                     String txt2 = txtimage.split(".png")[0];
                     int id = getResources().getIdentifier(txt2,"drawable", getContext().getPackageName());
-                    System.out.println("da int "+id);
 
                     itemImage.setImageResource(id);
                 }
@@ -85,7 +84,6 @@ public class CheckableCardView  extends CardView implements Checkable {
                 String backgroundColor = ta.getString(R.styleable.CheckableCardView_card_background);
 
                 if(backgroundColor!=null){
-                    System.out.println(backgroundColor);
                     Class res = R.drawable.class;
                     Field field = res.getField(backgroundColor);
 

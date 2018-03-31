@@ -1,6 +1,8 @@
 package com.ppg.spunky_kotlin
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +19,7 @@ import java.net.URL
 
 class AnadirJugadoresActivity : AppCompatActivity() {
 
+
     //Constantes
     companion object {
         val BASE_URL = "https://us-central1-spunky-ppg.cloudfunctions.net/aleatorio"
@@ -30,14 +33,18 @@ class AnadirJugadoresActivity : AppCompatActivity() {
 
     private var arrayAdapter: ArrayAdapter<*>? = null
 
-    private var mFirebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private var mDatabaseReferenceConexiones: DatabaseReference = mFirebaseDatabase!!.reference.child("Conexiones")
+    private var mRootDB: FirebaseDatabase = FirebaseDatabase.getInstance()
+    private var mDatabaseReferenceConexiones: DatabaseReference = mRootDB.reference.child("Conexiones")
+
 
     private var codigo = CODIGO
     private var preguntas: IntArray = intArrayOf()
     private var android_id: String = ""
     private var escribirBD: String = NO_GENERADO
     private var apodos: Array<String> = arrayOf()
+
+    private var prefs: SharedPreferences?=null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +55,10 @@ class AnadirJugadoresActivity : AppCompatActivity() {
         preguntas = intent.getIntArrayExtra(EscogerGrupoActivity.Constants.PREGUNTAS)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anadir_jugadores)
+
+        prefs = applicationContext.getSharedPreferences(EscogerGrupoActivity.Constants.PREFS_FILENAME, Context.MODE_PRIVATE)
+
+        printQuestions()
 
         mDatabaseReferenceConexiones.keepSynced(true)
 
@@ -86,7 +97,6 @@ class AnadirJugadoresActivity : AppCompatActivity() {
         } finally {
             urlConnection!!.disconnect()
             obtenerConexiones()
-            textViewCodigo.text = codigo
             escribirBD = NO_ESCRITO
         }
 
@@ -153,6 +163,21 @@ class AnadirJugadoresActivity : AppCompatActivity() {
         intent.putExtra(EscogerGrupoActivity.Constants.PREGUNTAS, preguntas)
         startActivity(intent)
     }
+
+    fun printQuestions() {
+
+        val default:Set<String> = hashSetOf("No se encontró nada", "quizas si")
+
+        var test: Set<String> =  prefs!!.getStringSet("Pregunta2",default)
+        println("test 1 anadir $test")
+
+        test =  prefs!!.getStringSet("Pregunta4",default)
+        println("test 2 anadir $test")
+
+        var test2 =  prefs!!.getStringSet("Pregunta8",default)
+        println("test 5 anadir $test2")
+    }
+
 }
 
 
