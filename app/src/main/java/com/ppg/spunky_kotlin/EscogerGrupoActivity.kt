@@ -1,11 +1,14 @@
 package com.ppg.spunky_kotlin
 
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.View
 
 import com.google.firebase.database.*
@@ -109,7 +112,9 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
      */
 
     private fun oprimirSiguiente(){
-
+        val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetworkInfo
+        //var isConnected = connectivity()
         //Una card seleccionada
         if(groupView.any { it.isChecked }){
             println("is checked")
@@ -119,7 +124,23 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
                 edadesSeleccionadas = findCheckedAges()
                 println("is checked2")
 
-                initGrupos()
+                launchBlueActivity()
+                /*
+                if(activeNetwork!=null){
+                    if(activeNetwork.type.equals(ConnectivityManager.TYPE_WIFI)){
+                        initGrupos()
+                    }
+                    if(activeNetwork.type.equals(ConnectivityManager.TYPE_MOBILE)){
+                        initGrupos()
+                    }
+                    if(activeNetwork.type.equals(ConnectivityManager.TYPE_MOBILE_DUN)){
+                        initGrupos()
+                    }
+                }
+                else{
+                    launchBlueActivity()
+                }
+                */
             }
 
             //No hay edad seleccionada
@@ -198,6 +219,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         val gruposListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
+
                 println("el grupo" + grupoSeleccionado)
                 val hijo:DataSnapshot = dataSnapshot.child(grupoSeleccionado)
 
@@ -217,6 +239,8 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
                 println("total Finales $preguntasFinales")
 
                 launchNextActivity(preguntasFinales)
+
+
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 println("loadPost:onCancelled ${databaseError.toException()}")
@@ -225,10 +249,36 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         gruposReference.addValueEventListener(gruposListener)
     }
 
-    private fun launchNextActivity(preguntas: IntArray)
+    /*
+    fun connectivity(): String {
+        var message = "not_exist"
+        val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetworkInfo
+        //val isConnected = activeNetwork.isConnectedOrConnecting
+
+            when (activeNetwork.type) {
+                ConnectivityManager.TYPE_WIFI -> message = "exist"
+                ConnectivityManager.TYPE_MOBILE -> message = "exist"
+                ConnectivityManager.TYPE_MOBILE_DUN -> message = "exist"
+
+        }
+
+
+        return message
+    }
+    */
+
+
+    private fun launchNextActivity(preguntas: IntArray?)
     {
         val intent = Intent(this, AnadirJugadoresActivity::class.java)
         intent.putExtra(Constants.PREGUNTAS,preguntas)
+        startActivity(intent)
+    }
+
+    private fun launchBlueActivity()
+    {
+        val intent = Intent(this, AnadirJugadoresBlueActivity::class.java)
         startActivity(intent)
     }
 
