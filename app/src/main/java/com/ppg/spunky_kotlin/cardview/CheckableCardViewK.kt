@@ -71,7 +71,6 @@ class CheckableCardViewK: CardView,Checkable   {
                     val txtimage = image!!.split("/".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()[2]
                     val txt2 = txtimage.split(".png".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()[0]
                     val id = resources.getIdentifier(txt2, "drawable", context.packageName)
-                    println("da int $id")
 
                     itemImage.setImageResource(id)
                 }
@@ -80,7 +79,6 @@ class CheckableCardViewK: CardView,Checkable   {
                 val backgroundColor = ta.getString(R.styleable.CheckableCardView_card_background)
 
                 if (backgroundColor != null) {
-                    println(backgroundColor)
                     val res = R.drawable::class.java
                     val field = res.getField(backgroundColor)
 

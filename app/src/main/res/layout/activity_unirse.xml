@@ -8,7 +8,7 @@
     tools:context="com.ppg.spunky_kotlin.UnirseActivity">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textView6"
         android:layout_width="406dp"
         android:layout_height="114dp"
         android:layout_marginBottom="8dp"
@@ -16,26 +16,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/cabin"
-        android:text="Escribe el código del juego"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/txt_codigo" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="406dp"
-        android:layout_height="71dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/cabin"
-        android:text="¿Cuál es tu apodo?"
+        android:text="@string/label_apodo"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="40sp"
@@ -45,49 +26,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.06"
         tools:text="@string/txt_unirse" />
-
-    <EditText
-        android:id="@+id/editTextUnirse"
-        android:layout_width="0dp"
-        android:layout_height="79dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/white"
-        android:ems="10"
-        android:fontFamily="@font/cabin"
-        android:inputType="number"
-        android:maxLength="7"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.649" />
-
-    <Button
-        android:id="@+id/buttonJugar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:fontFamily="@font/cabin"
-        android:lineSpacingExtra="24sp"
-        android:onClick="obtenerConexiones"
-        android:text="Unirme"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92"
-        tools:text="@string/button_unirme" />
 
     <EditText
         android:id="@+id/editTextApodo"
@@ -101,14 +39,75 @@
         android:ems="10"
         android:fontFamily="@font/cabin"
         android:inputType="textPersonName"
-        android:maxLength="15"
         android:singleLine="true"
         android:textAlignment="center"
         android:textSize="35sp"
+        android:maxLength="15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.251" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="406dp"
+        android:layout_height="114dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/cabin"
+        android:text="@string/label_escribir_codigo"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/txt_codigo" />
+
+
+    <EditText
+        android:id="@+id/editTextUnirse"
+        android:layout_width="wrap_content"
+        android:layout_height="79dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:inputType="number"
+        android:maxLength="7"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.701" />
+
+    <Button
+        android:id="@+id/buttonJugar"
+        android:layout_width="711dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:fontFamily="@font/cabin"
+        android:text="@string/button_unirme"
+        tools:text="@string/button_unirme"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 
 </android.support.constraint.ConstraintLayout>

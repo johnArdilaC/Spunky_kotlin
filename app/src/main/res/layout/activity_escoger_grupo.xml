@@ -135,10 +135,10 @@
     <TextView
         android:id="@+id/textView9"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginEnd="45dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/cabin"
         android:text="@string/label_tipo_edad"
         android:textColor="@color/colorBlack"
@@ -150,11 +150,11 @@
 
     <GridLayout
         android:id="@+id/ageGrid"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="390dp"
         android:layout_marginEnd="40dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="49dp"
         android:layout_weight="8"
         android:alignmentMode="alignMargins"
         android:columnCount="2"
@@ -162,6 +162,7 @@
         android:padding="0dp"
         android:rowCount="2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9">
 
@@ -270,10 +271,10 @@
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ageGrid"
-        app:layout_constraintVertical_bias="0.864" />
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </android.support.constraint.ConstraintLayout>
