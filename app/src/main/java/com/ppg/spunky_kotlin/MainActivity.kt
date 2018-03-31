@@ -100,13 +100,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
 
     private fun crearJuego()
     {
-        val intent = Intent(this, EnConstruccionActivity::class.java)
+        val intent = Intent(this, AnadirJugadoresBlueActivity::class.java)
         startActivity(intent)
     }
 
     private fun unirse()
     {
-        val intent = Intent(this, UnirseActivity::class.java)
+        val intent = Intent(this, UnirseBlueActivity::class.java)
         startActivity(intent)
     }
 

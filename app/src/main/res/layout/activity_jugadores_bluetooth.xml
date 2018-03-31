@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.ppg.spunky_kotlin.JugadoresBluetoothActivity">
 
+
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"

@@ -1,9 +1,11 @@
 package com.ppg.spunky_kotlin
 
-import android.bluetooth.BluetoothAdapter
+
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.bluetooth.BluetoothAdapter
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -127,13 +129,32 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
      */
 
     private fun oprimirSiguiente(){
-
+        val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetworkInfo
+        //var isConnected = connectivity()
         //Una card seleccionada
         if(groupView.any { it.isChecked }){
             grupoSeleccionado=findCheckedGroup()
 
             if(ageView.any { it.isChecked }){
                 edadesSeleccionadas = findCheckedAges()
+
+                /*
+                if(activeNetwork!=null){
+                    if(activeNetwork.type.equals(ConnectivityManager.TYPE_WIFI)){
+                        initGrupos()
+                    }
+                    if(activeNetwork.type.equals(ConnectivityManager.TYPE_MOBILE)){
+                        initGrupos()
+                    }
+                    if(activeNetwork.type.equals(ConnectivityManager.TYPE_MOBILE_DUN)){
+                        initGrupos()
+                    }
+                }
+                else{
+                    launchBlueActivity()
+                }
+                */
 
                 //Verificar si hay conexion para inicializar grupos o preguntas
                 isConnected = !(changeReceiver.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED)
@@ -224,6 +245,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         val gruposListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
+
                 println("el grupo" + grupoSeleccionado)
                 val hijo:DataSnapshot = dataSnapshot.child(grupoSeleccionado)
 
@@ -242,6 +264,8 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
                 println("total APTAS  $preguntasAptas")
                 println("total Finales $preguntasFinales")
 
+                launchNextActivity(preguntasFinales)
+
                 //Guardar preguntas en shared preferences
                 saveQuestionsSP(preguntasFinales)
             }
@@ -251,6 +275,29 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         }
         gruposReference.addValueEventListener(gruposListener)
     }
+
+
+    /*
+    fun connectivity(): String {
+        var message = "not_exist"
+        val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetworkInfo
+        //val isConnected = activeNetwork.isConnectedOrConnecting
+
+            when (activeNetwork.type) {
+                ConnectivityManager.TYPE_WIFI -> message = "exist"
+                ConnectivityManager.TYPE_MOBILE -> message = "exist"
+                ConnectivityManager.TYPE_MOBILE_DUN -> message = "exist"
+
+        }
+
+
+        return message
+    }
+    */
+
+
+    //private fun launchNextActivity(preguntas: IntArray?)
 
 
     /**
@@ -373,5 +420,10 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         startActivity(intent)
     }
 
+    private fun launchBlueActivity()
+    {
+        val intent = Intent(this, AnadirJugadoresBlueActivity::class.java)
+        startActivity(intent)
+    }
 
 }
