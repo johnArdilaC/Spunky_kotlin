@@ -124,8 +124,6 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
                 edadesSeleccionadas = findCheckedAges()
                 println("is checked2")
 
-                launchBlueActivity()
-                /*
                 if(activeNetwork!=null){
                     if(activeNetwork.type.equals(ConnectivityManager.TYPE_WIFI)){
                         initGrupos()
@@ -140,7 +138,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
                 else{
                     launchBlueActivity()
                 }
-                */
+
             }
 
             //No hay edad seleccionada
