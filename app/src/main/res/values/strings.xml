@@ -81,4 +81,18 @@
     <string name="button_continue_internet">Continuar con internet</string>
     <string name="button_continue_bluetooth">Usar bluetooth</string>
 
+    <string name="txt_resultados">Tabla de resultados</string>
+    <string name="button_enviar_reto">Enviar reto</string>
+    <string name="title_activity_record_memory">RecordMemoryActivity</string>
+    <string name="title_activity_take_photo">TakePhotoActivity</string>
+    <string name="title_activity_take_video">TakeVideoActivity</string>
+    <string name="toma_un_video">Toma un Video</string>
+    <string name="salir">SALIR</string>
+    <string name="play">PLAY</string>
+    <string name="capturar_nuevo_recuerdo">CAPTURAR NUEVO RECUERDO</string>
+    <string name="magnifico_video">¡Magnifico Video!</string>
+    <string name="toma_una_fotografia">Toma una Fotografia</string>
+    <string name="recuerda_este_momento">¡Recuerda este momento!</string>
+
+
 </resources>

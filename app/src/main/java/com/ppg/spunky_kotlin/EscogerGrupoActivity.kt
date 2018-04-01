@@ -25,6 +25,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
     object Constants{
         val PREGUNTAS = "com.ppg.spunky.PREGUNTAS"
+        val PUNTAJE= "com.ppg.spunky.PUNTAJE"
         val PREFS_FILENAME = "com.ppg.spunky.prefs"
     }
 

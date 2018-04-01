@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ppg.spunky_kotlin">
-    
+
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -18,14 +17,17 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.hardware.sensor.accelerometer"/>
-    <uses-permission android:name="android.hardware.sensor.gyroscope"/>
+    <uses-permission android:name="android.hardware.sensor.accelerometer" />
+    <uses-permission android:name="android.hardware.sensor.gyroscope" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logoapp"
@@ -60,11 +62,20 @@
         <activity android:name=".AnadirJugadoresActivity" />
         <activity android:name=".AnadirJugadoresBlueActivity" />
         <activity android:name=".UnirseBlueActivity" />
-        <activity android:name=".RecordMemoryActivity" />
-        <activity android:name=".TakePhotoActivity" />
-        <activity android:name=".TakeVideoActivity" />
-        <activity android:name=".UnirseActivity"></activity>
+        <activity android:name=".UnirseActivity" />
+        <activity android:name=".ResultadosActivity" />
+        <activity
+            android:name=".RecordMemoryActivity"
+            android:label="@string/title_activity_record_memory"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TakePhotoActivity"
+            android:label="@string/title_activity_take_photo"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TakeVideoActivity"
+            android:label="@string/title_activity_take_video"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
-

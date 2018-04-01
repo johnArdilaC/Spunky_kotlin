@@ -79,9 +79,7 @@ class ElegirJuegoActivity : AppCompatActivity() {
                                     // Device does not support Bluetooth
                                     crearMensaje(R.string.label_bluetooth)
                                 } else if (!mBluetoothAdapter.isEnabled) {
-                                    Log.e("BT Adapter", mBluetoothAdapter.toString())
                                     val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                                    Log.e("BT Adapter", enableBtIntent.toString())
                                     startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
                                 } else if (mBluetoothAdapter.isEnabled) {
                                     irABluetoothActivity()
