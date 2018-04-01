@@ -35,7 +35,7 @@
         android:roundIcon="@drawable/logoapp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,33 +49,34 @@
 
         <activity
             android:name=".EscogerGrupoActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ppg.spunky_kotlin.MainActivity" />
         </activity>
-        <activity android:name=".TestCheckable" />
-        <activity android:name=".EnConstruccionActivity" />
-        <activity android:name=".Carousel" />
-        <activity android:name=".PreguntaActivity" />
-        <activity android:name=".ElegirJuegoActivity" />
-        <activity android:name=".AnadirJugadoresActivity" />
-        <activity android:name=".AnadirJugadoresBlueActivity" />
-        <activity android:name=".UnirseBlueActivity" />
-        <activity android:name=".UnirseActivity" />
-        <activity android:name=".ResultadosActivity" />
+        <activity android:name=".TestCheckable" android:screenOrientation="portrait" />
+        <activity android:name=".EnConstruccionActivity" android:screenOrientation="portrait" />
+        <activity android:name=".Carousel" android:screenOrientation="portrait" />
+        <activity android:name=".PreguntaActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ElegirJuegoActivity" android:screenOrientation="portrait" />
+        <activity android:name=".AnadirJugadoresActivity" android:screenOrientation="portrait" />
+        <activity android:name=".AnadirJugadoresBlueActivity" android:screenOrientation="portrait" />
+        <activity android:name=".UnirseBlueActivity" android:screenOrientation="portrait" />
+        <activity android:name=".UnirseActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ResultadosActivity" android:screenOrientation="portrait" />
         <activity
             android:name=".RecordMemoryActivity"
             android:label="@string/title_activity_record_memory"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme" android:screenOrientation="portrait" />
         <activity
             android:name=".TakePhotoActivity"
             android:label="@string/title_activity_take_photo"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"  android:screenOrientation="portrait"/>
         <activity
             android:name=".TakeVideoActivity"
             android:label="@string/title_activity_take_video"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

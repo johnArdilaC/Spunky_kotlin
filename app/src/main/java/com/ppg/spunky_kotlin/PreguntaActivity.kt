@@ -73,13 +73,13 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
         isConnected = !(changeReceiver.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED)
 
 
-        if(isConnected){
+        /*if(isConnected){
             initPreguntas(preguntas[0])
         }
-        else{
+        else{*/
             initPreguntaNoConn(preguntas[0])
 
-        }
+        //}
 
 
         // get reference of the service

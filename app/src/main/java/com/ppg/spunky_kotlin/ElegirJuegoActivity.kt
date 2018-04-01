@@ -57,42 +57,48 @@ class ElegirJuegoActivity : AppCompatActivity() {
 
 
         btnsJugar.forEach {
-            it.setOnClickListener {
-                // checking for last page
-                // if last page home screen will be launched
-                val current = getItem(+1)
+            if (it == btn_jugarTrivia) {
+                it.setOnClickListener {
+                    // checking for last page
+                    // if last page home screen will be launched
+                    val current = getItem(+1)
 
-                isConnected = !(changeReceiver.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED)
+                    isConnected = !(changeReceiver.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED)
 
 
-                if (current < layouts.size && isConnected) {
+                    if (current < layouts.size && isConnected) {
                         launchNextActivity()
 
-                }
-                else if (!isConnected) {
-                    val builder = AlertDialog.Builder(this@ElegirJuegoActivity)
-                    builder.setMessage(R.string.label_conexion)
-                            .setTitle(R.string.label_informacion)
-                            .setPositiveButton(R.string.button_bluetooth, DialogInterface.OnClickListener { dialog, id ->
-                                val mBluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-                                if (mBluetoothAdapter == null) {
-                                    // Device does not support Bluetooth
-                                    crearMensaje(R.string.label_bluetooth)
-                                } else if (!mBluetoothAdapter.isEnabled) {
-                                    val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
-                                } else if (mBluetoothAdapter.isEnabled) {
-                                    irABluetoothActivity()
-                                }
-                            })
-                            .setNeutralButton(R.string.button_volver, DialogInterface.OnClickListener { dialog, id -> })
-                    val dialog = builder.create()
-                    dialog.show()
-                } else {
+                    }
+                    else if (!isConnected) {
+                        val builder = AlertDialog.Builder(this@ElegirJuegoActivity)
+                        builder.setMessage(R.string.label_conexion)
+                                .setTitle(R.string.label_informacion)
+                                .setPositiveButton(R.string.button_bluetooth, DialogInterface.OnClickListener { dialog, id ->
+                                    val mBluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+                                    if (mBluetoothAdapter == null) {
+                                        // Device does not support Bluetooth
+                                        crearMensaje(R.string.label_bluetooth)
+                                    } else if (!mBluetoothAdapter.isEnabled) {
+                                        val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                                        startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
+                                    } else if (mBluetoothAdapter.isEnabled) {
+                                        irABluetoothActivity()
+                                    }
+                                })
+                                .setNeutralButton(R.string.button_volver, DialogInterface.OnClickListener { dialog, id -> })
+                        val dialog = builder.create()
+                        dialog.show()
+                    } else {
 
+                    }
                 }
+
             }
-
+            else{
+                it.isEnabled=false
+                it.text=resources.getString(R.string.proximamente)
+            }
         }
 
     }

@@ -12,6 +12,7 @@ import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -57,18 +58,14 @@ public class UnirseBlueActivity extends AppCompatActivity {
         setContentView(R.layout.activity_unirseblue);
         blueAdapter = BluetoothAdapter.getDefaultAdapter();
         findViewById();
-        if (blueAdapter == null) {
-            // Device does not support Bluetooth
-            crearMensaje(R.string.label_bluetooth);
-        }else{
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
             if(!blueAdapter.isEnabled()){
                 Intent enableIntent=new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableIntent,REQUEST_ENABLE_BLUE);
                 implementListeners();
             }
-        }
-
-
     }
 
     private void implementListeners() {
