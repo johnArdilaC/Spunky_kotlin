@@ -72,8 +72,13 @@ public class AnadirJugadoresBlueActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String string=String.valueOf(writeMsg.getText());
-                Log.e("valor string", string);
-                sendReceived.write(string.getBytes());
+                if(string.trim().equals("")){
+
+                }
+                else{
+                    Log.e("valor string", string);
+                    sendReceived.write(string.getBytes());
+                }
             }
         });
 

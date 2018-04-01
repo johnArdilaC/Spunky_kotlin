@@ -63,6 +63,7 @@
         <activity android:name=".RecordMemoryActivity" />
         <activity android:name=".TakePhotoActivity" />
         <activity android:name=".TakeVideoActivity" />
+        <activity android:name=".EnviarRetoActivity" />
         <activity android:name=".UnirseActivity"></activity>
     </application>
 

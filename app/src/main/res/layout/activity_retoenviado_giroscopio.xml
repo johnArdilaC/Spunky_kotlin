@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background402x"
+    tools:context="com.ppg.spunky_kotlin.EnviarRetoActivity">
+
+    <TextView
+        android:id="@+id/text55"
+        android:layout_width="506dp"
+        android:layout_height="111dp"
+        android:fontFamily="@font/cabin"
+        android:paddingHorizontal="5sp"
+        android:text="¡Envia un Reto!"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/writeRetoGiro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/text44"
+        android:layout_width="506dp"
+        android:layout_height="111dp"
+        android:fontFamily="@font/cabin"
+        android:paddingHorizontal="5sp"
+        android:text="¡Gira tu telefono a la derecha para enviar el reto!"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/writeRetoGiro"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/writeRetoGiro"
+        android:layout_width="464dp"
+        android:layout_height="104dp"
+        android:ems="10"
+        android:hint="Escribe el Reto"
+        android:inputType="textMultiLine"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/text44"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text55"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="256dp"
+        android:layout_height="213dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/btn_star_big_on"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="696dp" />
+
+</android.support.constraint.ConstraintLayout>

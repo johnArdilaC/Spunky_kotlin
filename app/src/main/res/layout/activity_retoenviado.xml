@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ppg.spunky_kotlin.EnviarRetoActivity"
+    android:background="@drawable/background402x">
+
+    <TextView
+        android:id="@+id/text55"
+        android:layout_width="506dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="260dp"
+        android:fontFamily="@font/cabin"
+        android:paddingHorizontal="5sp"
+        android:text="¡Envia un Reto!"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"/>
+
+
+    <Button
+        android:id="@+id/btnSendReto"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="188dp"
+        android:text="Enviar reto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/writeApodo"/>
+
+    <EditText
+        android:id="@+id/writeReto"
+        android:layout_width="464dp"
+        android:layout_height="104dp"
+        android:ems="10"
+        android:hint="Escribe el Reto"
+        android:inputType="textMultiLine"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSendReto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text55"
+        tools:ignore="MissingConstraints" />
+
+</android.support.constraint.ConstraintLayout>

@@ -80,5 +80,7 @@
     <string name="label_unirse">Recuerda que debes unirte al juego  usando internet si tienes el código. De lo contrario, debes usar bluetooth</string>
     <string name="button_continue_internet">Continuar con internet</string>
     <string name="button_continue_bluetooth">Usar bluetooth</string>
+    <string name="label_errorReto">Por Favor Escribe un Reto</string>
+
 
 </resources>
