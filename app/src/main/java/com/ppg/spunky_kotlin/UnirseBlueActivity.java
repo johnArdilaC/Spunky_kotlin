@@ -3,10 +3,13 @@ package com.ppg.spunky_kotlin;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -54,13 +57,18 @@ public class UnirseBlueActivity extends AppCompatActivity {
         setContentView(R.layout.activity_unirseblue);
         blueAdapter = BluetoothAdapter.getDefaultAdapter();
         findViewById();
-
-        if(!blueAdapter.isEnabled()){
-            Intent enableIntent=new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent,REQUEST_ENABLE_BLUE);
+        if (blueAdapter == null) {
+            // Device does not support Bluetooth
+            crearMensaje(R.string.label_bluetooth);
+        }else{
+            if(!blueAdapter.isEnabled()){
+                Intent enableIntent=new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableIntent,REQUEST_ENABLE_BLUE);
+                implementListeners();
+            }
         }
 
-        implementListeners();
+
     }
 
     private void implementListeners() {
@@ -226,6 +234,18 @@ public class UnirseBlueActivity extends AppCompatActivity {
         }
 
     }
+    private void crearMensaje(int mensaje)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(UnirseBlueActivity.this);
+        builder.setMessage(mensaje)
+                .setTitle(R.string.label_informacion)
+                .setNeutralButton(R.string.button_volver, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
 
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }
 

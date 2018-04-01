@@ -61,6 +61,8 @@
     <string name="button_volver">Volver</string>
 
     <string name="label_conexion">En este momento no tienes conexión a internet. Puedes agregar a tus amigos por Bluetooth o encender tu conexión a internet.</string>
+    <string name="label_conexion_bluetooth">En este momento no tienes conexión a internet. Puedes unirte al juego via bluetooth.</string>
+
     <string name="button_bluetooth">Usar bluetooth</string>
     <string name="label_bluetooth">Tu dispositivo no soporta Bluetooth, intenta conectarte nuevamente utilizando internet.</string>
 
@@ -75,5 +77,8 @@
     <string name="title_error">Error</string>
     <string name="label_apodo">¿Cuál es tu apodo?</string>
     <string name="label_escribir_codigo">Escribe el código del juego</string>
+    <string name="label_unirse">Recuerda que debes unirte al juego  usando internet si tienes el código. De lo contrario, debes usar bluetooth</string>
+    <string name="button_continue_internet">Continuar con internet</string>
+    <string name="button_continue_bluetooth">Usar bluetooth</string>
 
 </resources>

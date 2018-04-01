@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,6 +72,7 @@ public class AnadirJugadoresBlueActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String string=String.valueOf(writeMsg.getText());
+                Log.e("valor string", string);
                 sendReceived.write(string.getBytes());
             }
         });

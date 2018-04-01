@@ -34,6 +34,17 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
     private var mSensorManager : SensorManager? = null
     private var mAccelerometer : Sensor?= null
 
+    private var last_update: Long = 0
+    private var last_movement:Long = 0
+
+    private var prevX = 0f
+    private var prevY = 0f
+    private var prevZ = 0f
+    private var curX = 0f
+    private var curY = 0f
+    private var curZ = 0f
+    private var posicion = 0f
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -210,14 +221,17 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
         Log.e("on accuracy changed ", p1.toString())
     }
 
+
     override fun onSensorChanged(event: SensorEvent?) {
         if (event != null) {
 
             val x = event.values[0]
             val y = event.values[1]
+            val z = event.values[1]
+
 
             var g: MutableList<Double> = mutableListOf()
-            event.values.forEach { g.add(it.toDouble() )}
+            event.values.forEach { g.add(it.toDouble()) }
 
             val normOfg = Math.sqrt(g[0] * g[0] + g[1] * g[1] + g[2] * g[2])
 
@@ -227,50 +241,40 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
 
             val inclination = Math.round(Math.toDegrees(Math.acos(g[2]))).toInt()
 
-            if (inclination < 25 || inclination > 155)
-            {
+            if (inclination < 25 || inclination > 155) {
                 if (inclination < -5) {
-                 //   println("You tilt the device right NO FLAT $inclination $x  $y")
+                    //println("Equipo no inclinado")
                 }
                 if (inclination > 5) {
-                   // println("You tilt the device left NO FLAT $inclination $x  $y")
+                    //println(""Equipo no inclinado")
 
                 }
-            }
-            else
-            {
+            } else {
                 val r = Math.round(Math.toDegrees(Math.atan2(g[0], g[1]))).toInt()
+                    if (r < -5 ) {
+                        println("Tilt right $inclination $r $x  $y $z")
+                        validar(card_b)
+                        mSensorManager!!.unregisterListener(this)
+                    }
+                    if (r > 7) {
+                        println("Tilt left $inclination  $r $x  $y $z")
+                        validar(card_a)
+                        mSensorManager!!.unregisterListener(this)
+                    }
+                val s = Math.round(Math.toDegrees(Math.atan2(g[1], g[2]))).toInt()
+                val t = Math.round(Math.toDegrees(Math.asin(g[0]))).toInt()
 
-                if (r < -5) {
-                   // println("You tilt the device right NO FLAT $r $x  $y")
+                if(inclination<100 ){
+                      //  println("You tilt the device up $inclination $t $s $r $x  $y $z")
+                    }
+
+                if (inclination > 100 ) {
+                    println("You tilt the device down $inclination  $r $x  $y $z")
+                    validar(card_c)
+                    mSensorManager!!.unregisterListener(this)
+
                 }
-                if (r > 5) {
-                  //  println("You tilt the device left NO FLAT $r $x  $y")
-
-                }
-
-
             }
-
-
-            if (Math.abs(x) > Math.abs(y)) {
-            if (x < -5) {
-               // println("You tilt the device right $x  $y")
-            }
-            if (x > 5) {
-            //    println("You tilt the device left $x  $y")
-
-            }
-        } else {
-            if (y < -5) {
-              //  println("You tilt the device up $x  $y")
-
-            }
-            if (y > 100) {
-                //println("You tilt the device down $x  $y")
-
-            }
-        }
         }
     }
 

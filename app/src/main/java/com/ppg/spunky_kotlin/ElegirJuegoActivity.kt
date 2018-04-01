@@ -30,7 +30,7 @@ class ElegirJuegoActivity : AppCompatActivity() {
     private var preguntas: IntArray = intArrayOf()
 
     //Atributo que indica si hay conexión
-    private var isConnected: Boolean = false
+    private var isConnected: Boolean = true
     private val REQUEST_ENABLE_BT = 1
     private var changeReceiver: NetworkChangeReceiver = NetworkChangeReceiver()
 
@@ -55,6 +55,7 @@ class ElegirJuegoActivity : AppCompatActivity() {
         view_pager.setAdapter(myViewPagerAdapter)
         view_pager.addOnPageChangeListener(viewPagerPageChangeListener)
 
+
         btnsJugar.forEach {
             it.setOnClickListener {
                 // checking for last page
@@ -62,6 +63,7 @@ class ElegirJuegoActivity : AppCompatActivity() {
                 val current = getItem(+1)
 
                 isConnected = !(changeReceiver.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED)
+
 
                 if (current < layouts.size && isConnected) {
                         launchNextActivity()
@@ -202,7 +204,7 @@ class ElegirJuegoActivity : AppCompatActivity() {
 
 
     private fun irABluetoothActivity() {
-        startActivity(Intent(this, JugadoresBluetoothActivity::class.java))
+        startActivity(Intent(this, AnadirJugadoresBlueActivity::class.java))
         finish()
     }
 

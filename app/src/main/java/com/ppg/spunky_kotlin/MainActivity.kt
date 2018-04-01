@@ -1,10 +1,12 @@
 package com.ppg.spunky_kotlin
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
 import com.google.android.gms.auth.api.Auth
@@ -37,6 +39,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
     private val edadesReference: DatabaseReference = mRootDB.reference.child("Edades")
     private val preguntasReference: DatabaseReference = mRootDB.reference.child("Juegos").child("PreguntasTrivia")
 
+    private var isConnected: Boolean = true
+
+    private var changeReceiver: NetworkChangeReceiver = NetworkChangeReceiver()
 
     object Constants{
         val PREGUNTAS_BD = "com.ppg.spunky.prefs_DB"
@@ -77,7 +82,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.e("Connection failed", p0.toString())
     }
 
     override fun onClick(v: View?) {
@@ -100,14 +105,35 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
 
     private fun crearJuego()
     {
-        val intent = Intent(this, AnadirJugadoresBlueActivity::class.java)
+        val intent = Intent(this, EnConstruccionActivity::class.java)
         startActivity(intent)
     }
 
     private fun unirse()
     {
-        val intent = Intent(this, UnirseBlueActivity::class.java)
-        startActivity(intent)
+        val intentBluetooth = Intent(this, UnirseBlueActivity::class.java)
+        val intentWifi = Intent(this, UnirseActivity::class.java)
+
+        isConnected = !(changeReceiver.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED)
+
+        //Si tiene internet, mandar cuadro de dialogo preguntando si quiere por wifi o bluetooth
+        if(isConnected){
+            val builder = AlertDialog.Builder(this@MainActivity)
+            builder.setMessage(R.string.label_unirse)
+                    .setTitle(R.string.label_informacion)
+                    .setPositiveButton(R.string.button_continue_internet, DialogInterface.OnClickListener { dialog, id -> startActivity(intentWifi) })
+                    .setNegativeButton(R.string.button_continue_bluetooth, DialogInterface.OnClickListener{dialog, id -> startActivity(intentBluetooth)})
+            val dialog = builder.create()
+            dialog.show()
+        }
+        else{
+            val builder = AlertDialog.Builder(this@MainActivity)
+            builder.setMessage(R.string.label_conexion_bluetooth)
+                    .setTitle(R.string.label_informacion)
+                    .setPositiveButton(R.string.button_continue_bluetooth, DialogInterface.OnClickListener { dialog, id -> startActivity(intentBluetooth) })
+            val dialog = builder.create()
+            dialog.show()
+        }
     }
 
     /**
