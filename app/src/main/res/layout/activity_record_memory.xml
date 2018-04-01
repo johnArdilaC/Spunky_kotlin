@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background402x"
+    tools:context="com.ppg.spunky_kotlin.RecordMemoryActivity">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="490dp"
+        android:layout_height="235dp"
+        android:fontFamily="@font/cabin"
+        android:paddingHorizontal="5sp"
+        android:text="¡Recuerda este momento!"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btntakephoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btntakephoto"
+        android:layout_width="374dp"
+        android:layout_height="70dp"
+        android:text="Toma una Fotografia"
+        app:layout_constraintBottom_toTopOf="@+id/btntakevideo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btntakevideo"
+        android:layout_width="374dp"
+        android:layout_height="70dp"
+        android:text="Toma una Video"
+        app:layout_constraintBottom_toTopOf="@+id/btnexit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btntakephoto"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnexit"
+        android:layout_width="374dp"
+        android:layout_height="70dp"
+        android:text="Salir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btntakevideo"
+        tools:ignore="MissingConstraints" />
+
+</android.support.constraint.ConstraintLayout>

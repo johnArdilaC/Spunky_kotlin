@@ -22,6 +22,10 @@
     <uses-permission android:name="android.hardware.sensor.gyroscope"/>
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/logoapp"
@@ -56,7 +60,11 @@
         <activity android:name=".AnadirJugadoresActivity" />
         <activity android:name=".AnadirJugadoresBlueActivity" />
         <activity android:name=".UnirseBlueActivity" />
+        <activity android:name=".RecordMemoryActivity" />
+        <activity android:name=".TakePhotoActivity" />
+        <activity android:name=".TakeVideoActivity" />
         <activity android:name=".UnirseActivity"></activity>
     </application>
 
 </manifest>
+

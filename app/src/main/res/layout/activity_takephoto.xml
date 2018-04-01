@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background402x"
+    tools:context="com.ppg.spunky_kotlin.TakePhotoActivity">
+
+    <TextView
+        android:id="@+id/textGran"
+        android:layout_width="490dp"
+        android:layout_height="103dp"
+        android:fontFamily="@font/cabin"
+        android:paddingHorizontal="5sp"
+        android:text="¡Gran Foto!"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/photoView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/photoView"
+        android:layout_width="520dp"
+        android:layout_height="524dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnOtherPhoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textGran" />
+
+    <Button
+        android:id="@+id/btnOtherPhoto"
+        android:layout_width="220dp"
+        android:layout_height="65dp"
+        android:text="Capturar nuevo recuerdo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnExitPhoto"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photoView" />
+
+    <Button
+        android:id="@+id/btnExitPhoto"
+        android:layout_width="220dp"
+        android:layout_height="65dp"
+        android:text="salir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnOtherPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/photoView" />
+
+
+</android.support.constraint.ConstraintLayout>

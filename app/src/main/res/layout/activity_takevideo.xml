@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background402x"
+    tools:context="com.ppg.spunky_kotlin.TakeVideoActivity">
+
+    <TextView
+        android:id="@+id/textGran"
+        android:layout_width="634dp"
+        android:layout_height="113dp"
+        android:fontFamily="@font/cabin"
+        android:paddingHorizontal="5sp"
+        android:text="¡Magnifico Video!"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="65sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/videoView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="500dp"
+        android:layout_height="568dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnPlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textGran" />
+
+    <Button
+        android:id="@+id/btnOtherVideo"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="CAPTURAR NUEVO RECUERDO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnExitVideo"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlay" />
+
+    <Button
+        android:id="@+id/btnPlay"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:text="PLAY"
+        app:layout_constraintBottom_toTopOf="@+id/btnOtherVideo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoView" />
+
+    <Button
+        android:id="@+id/btnExitVideo"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="SALIR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnOtherVideo"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlay" />
+
+</android.support.constraint.ConstraintLayout>

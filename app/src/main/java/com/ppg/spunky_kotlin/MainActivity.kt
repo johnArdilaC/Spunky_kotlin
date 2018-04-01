@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
 
     private fun crearJuego()
     {
-        val intent = Intent(this, EnConstruccionActivity::class.java)
+        val intent = Intent(this, RecordMemoryActivity::class.java)
         startActivity(intent)
     }
 
