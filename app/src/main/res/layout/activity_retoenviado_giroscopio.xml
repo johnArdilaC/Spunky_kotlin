@@ -54,6 +54,7 @@
         android:inputType="textMultiLine"
         android:textColor="@color/colorWhite"
         android:textSize="35sp"
+        android:maxLength="100"
         app:layout_constraintBottom_toTopOf="@+id/text44"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
