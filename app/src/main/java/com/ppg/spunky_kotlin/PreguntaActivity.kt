@@ -65,7 +65,9 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
 
         Log.e("PUntaje ", puntaje.toString())
 
-        opciones = arrayOf(card_a, card_b, card_c, card_d)
+        opciones = arrayOf(card_a, card_b, card_c)
+        //opciones = arrayOf(card_a, card_b, card_c, card_d)
+
         opciones.forEach { it.setOnClickListener(this) }
 
         prefs = applicationContext.getSharedPreferences(EscogerGrupoActivity.Constants.PREFS_FILENAME, Context.MODE_PRIVATE)
@@ -86,7 +88,8 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         // focus in accelerometer
         mAccelerometer = mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-    }
+
+            }
 
     override fun onClick(v: View?) {
         val i = v!!.id
@@ -95,7 +98,7 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
             R.id.card_a -> validar(card_a)
             R.id.card_b -> validar(card_b)
             R.id.card_c -> validar(card_c)
-            R.id.card_d -> validar(card_d)
+           // R.id.card_d -> validar(card_d)
         }
     }
 
@@ -209,7 +212,7 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
                 card_a.text=opciones["a"].toString()
                 card_b.text=opciones["b"].toString()
                 card_c.text=opciones["c"].toString()
-                card_d.text=opciones["d"].toString()
+                //card_d.text=opciones["d"].toString()
                 correcta=opciones["correcta"].toString()
 
                 println("opciones "+opciones.values)

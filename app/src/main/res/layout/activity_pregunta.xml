@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ppg.spunky_kotlin.PreguntaActivity"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    >
+    tools:context="com.ppg.spunky_kotlin.PreguntaActivity">
 
     <TextView
         android:id="@+id/LRonda"
@@ -16,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorBackground"
         android:elevation="4dp"
         android:fontFamily="@font/cabin"
         android:text="@string/label_ronda"
@@ -39,6 +38,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="70dp"
         android:fontFamily="@font/cabin"
+        android:gravity="center_vertical|end"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
         android:textSize="59sp"
@@ -46,13 +46,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LRonda"
-        android:gravity="center_vertical|end"/>
+        app:layout_constraintTop_toBottomOf="@+id/LRonda" />
+
+
+    <!-- Row 2 -->
+
+    <!-- Column 1 -->
+    <com.ppg.spunky_kotlin.cardview.CheckableCardView
+        android:id="@+id/card_c"
+        android:layout_width="354dp"
+        android:layout_height="199dp"
+        android:layout_marginBottom="101dp"
+        android:layout_marginEnd="384dp"
+        android:layout_marginStart="384dp"
+        android:layout_marginTop="40dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:tag="c"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groupGrid" />
 
     <GridLayout
         android:id="@+id/groupGrid"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_width="0dp"
+        android:layout_height="223dp"
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="40dp"
         android:layout_marginStart="40dp"
@@ -62,20 +82,19 @@
         android:columnCount="2"
         android:columnOrderPreserved="false"
         android:padding="0dp"
-        android:rowCount="2"
+        android:rowCount="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LPregunta"
-        app:layout_constraintVertical_bias="0.845">
+        app:layout_constraintVertical_bias="0.152">
 
         <!-- Row 1 -->
 
         <!-- Column 1 -->
         <com.ppg.spunky_kotlin.cardview.CheckableCardView
             android:id="@+id/card_a"
-            android:tag="a"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -84,46 +103,30 @@
             android:layout_marginRight="16dp"
             android:layout_rowWeight="1"
             android:foreground="?android:attr/selectableItemBackground"
+            android:tag="a"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
 
-        />
+            />
 
         <!-- Column 2 -->
         <com.ppg.spunky_kotlin.cardview.CheckableCardView
             android:id="@+id/card_b"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            android:foreground="?android:attr/selectableItemBackground"
             android:tag="b"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_rowWeight="1"
-            android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"/>
+            app:cardElevation="2dp" />
+    </GridLayout>
 
-
-        <!-- Row 2 -->
-
-        <!-- Column 1 -->
-        <com.ppg.spunky_kotlin.cardview.CheckableCardView
-            android:id="@+id/card_c"
-            android:tag="c"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_rowWeight="1"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"/>
-
-        <!-- Column 2 -->
-        <com.ppg.spunky_kotlin.cardview.CheckableCardView
+    <!-- Column 2 -->
+    <!--<com.ppg.spunky_kotlin.cardview.CheckableCardView
             android:id="@+id/card_d"
             android:tag="d"
             android:layout_width="0dp"
@@ -135,8 +138,7 @@
             android:layout_rowWeight="1"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
-            app:cardElevation="2dp" />
+            app:cardElevation="2dp" />-->
 
-    </GridLayout>
 
 </android.support.constraint.ConstraintLayout>
