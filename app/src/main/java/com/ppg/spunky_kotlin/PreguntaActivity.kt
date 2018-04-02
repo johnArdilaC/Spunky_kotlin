@@ -45,22 +45,42 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
     private var curZ = 0f
     private var posicion = 0f
 
+    private var isConnected: Boolean = true
+
+    private var changeReceiver: NetworkChangeReceiver = NetworkChangeReceiver()
+
+    private var puntaje : Int =0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pregunta)
 
         //PASAR PREGUNTAS
-        preguntas = intent.getIntArrayExtra(EscogerGrupoActivity.Constants.PREGUNTAS)
+        val extras = intent.extras
+        preguntas = extras!!.getIntArray(EscogerGrupoActivity.Constants.PREGUNTAS)
+        puntaje = extras.getInt(EscogerGrupoActivity.Constants.PUNTAJE)
+
+        if(puntaje==-1) {Log.e("PUntaje -1", puntaje.toString())
+            puntaje=0}
+
+        Log.e("PUntaje ", puntaje.toString())
 
         opciones = arrayOf(card_a, card_b, card_c, card_d)
         opciones.forEach { it.setOnClickListener(this) }
 
         prefs = applicationContext.getSharedPreferences(EscogerGrupoActivity.Constants.PREFS_FILENAME, Context.MODE_PRIVATE)
 
-        //initPreguntas(preguntas[0]) -> ¿Vale la pena hacerlo con conexion cuando se puede facilmente desde
-        //shared preferences y no está haciento peticiones a la BD en cada activity?
-        initPreguntaNoConn(preguntas[0])
+        isConnected = !(changeReceiver.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED)
+
+
+        /*if(isConnected){
+            initPreguntas(preguntas[0])
+        }
+        else{*/
+            initPreguntaNoConn(preguntas[0])
+
+        //}
+
 
         // get reference of the service
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -90,6 +110,7 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
         val colorYellow=applicationContext.resources.getColor(R.color.colorYellow)
 
 
+
         if(thecard.tag==correcta){
             acerto=true
         }
@@ -109,6 +130,12 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
         }
 
         if(!acerto){thecard.setCardBackgroundColor(colorYellow)}
+
+
+        if(acerto){
+            Log.e("ACIERTO ", "$acerto acertoo")
+            puntaje+=2
+        }
 
         //Mensaje al jugador dependiendo si es correcta o no
         launchNextQuestion(acerto)
@@ -138,12 +165,23 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
 
     private fun pasarPreguntas() {
         val preguntasSiguientes = IntArray(preguntas.size - 1)
+
+        val extras = Bundle()
+        extras.putIntArray(EscogerGrupoActivity.Constants.PREGUNTAS, preguntasSiguientes)
+        extras.putInt(EscogerGrupoActivity.Constants.PUNTAJE, puntaje)
+
         if (preguntas.size > 1) {
             for (i in 1 until preguntas.size) {
                 preguntasSiguientes[i - 1] = preguntas[i]
             }
             val intent = Intent(this, PreguntaActivity::class.java)
-            intent.putExtra(EscogerGrupoActivity.Constants.PREGUNTAS, preguntasSiguientes)
+            intent.putExtras(extras)
+            startActivity(intent)
+            finish()
+        }
+        else{
+            val intent = Intent(this,ResultadosActivity::class.java)
+            intent.putExtra(EscogerGrupoActivity.Constants.PUNTAJE,puntaje)
             startActivity(intent)
             finish()
         }

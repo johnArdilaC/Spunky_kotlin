@@ -1,5 +1,6 @@
 package com.ppg.spunky_kotlin
 
+import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -63,9 +64,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
 
         val editor = prefsBD!!.edit()
 
-        guardarEdades(editor)
-        guardarGrupos(editor)
-        guardarPreguntas(editor)
+        if(isConnected){
+            guardarEdades(editor)
+            guardarGrupos(editor)
+            guardarPreguntas(editor)
+        }
+
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(WEB_CLIENT_ID)
@@ -105,7 +109,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
 
     private fun crearJuego()
     {
-        val intent = Intent(this, EnviarRetoActivity::class.java)
+        val intent = Intent(this, ResultadosActivity::class.java)
         startActivity(intent)
     }
 
@@ -114,26 +118,49 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
         val intentBluetooth = Intent(this, UnirseBlueActivity::class.java)
         val intentWifi = Intent(this, UnirseActivity::class.java)
 
+        val mBluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+
+
         isConnected = !(changeReceiver.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED)
 
         //Si tiene internet, mandar cuadro de dialogo preguntando si quiere por wifi o bluetooth
-        if(isConnected){
-            val builder = AlertDialog.Builder(this@MainActivity)
-            builder.setMessage(R.string.label_unirse)
-                    .setTitle(R.string.label_informacion)
-                    .setPositiveButton(R.string.button_continue_internet, DialogInterface.OnClickListener { dialog, id -> startActivity(intentWifi) })
-                    .setNegativeButton(R.string.button_continue_bluetooth, DialogInterface.OnClickListener{dialog, id -> startActivity(intentBluetooth)})
-            val dialog = builder.create()
-            dialog.show()
+        if(isConnected  ){
+            if(mBluetoothAdapter!=null){
+                val builder = AlertDialog.Builder(this@MainActivity)
+                builder.setMessage(R.string.label_unirse)
+                        .setTitle(R.string.label_informacion)
+                        .setPositiveButton(R.string.button_continue_internet, DialogInterface.OnClickListener { dialog, id -> startActivity(intentWifi) })
+                        .setNegativeButton(R.string.button_continue_bluetooth, DialogInterface.OnClickListener{dialog, id -> startActivity(intentBluetooth)})
+                val dialog = builder.create()
+                dialog.show()
+            }
+            else{
+                startActivity(intentWifi)
+            }
         }
         else{
-            val builder = AlertDialog.Builder(this@MainActivity)
-            builder.setMessage(R.string.label_conexion_bluetooth)
-                    .setTitle(R.string.label_informacion)
-                    .setPositiveButton(R.string.button_continue_bluetooth, DialogInterface.OnClickListener { dialog, id -> startActivity(intentBluetooth) })
-            val dialog = builder.create()
-            dialog.show()
+            if(mBluetoothAdapter!=null){
+                val builder = AlertDialog.Builder(this@MainActivity)
+                builder.setMessage(R.string.label_conexion_bluetooth)
+                        .setTitle(R.string.label_informacion)
+                        .setPositiveButton(R.string.button_continue_bluetooth, DialogInterface.OnClickListener { dialog, id -> startActivity(intentBluetooth) })
+                val dialog = builder.create()
+                dialog.show()
+            }
+            else{
+                crearMensaje(R.string.label_bluetooth)
+
+            }
         }
+    }
+
+    private fun crearMensaje(mensaje: Int) {
+        val builder = AlertDialog.Builder(this@MainActivity)
+        builder.setMessage(mensaje)
+                .setTitle(R.string.label_informacion)
+                .setNeutralButton(R.string.button_volver, DialogInterface.OnClickListener { dialog, id -> })
+        val dialog = builder.create()
+        dialog.show()
     }
 
     /**

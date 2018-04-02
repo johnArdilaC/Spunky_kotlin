@@ -58,8 +58,6 @@ class AnadirJugadoresActivity : AppCompatActivity() {
 
         prefs = applicationContext.getSharedPreferences(EscogerGrupoActivity.Constants.PREFS_FILENAME, Context.MODE_PRIVATE)
 
-        printQuestions()
-
         mDatabaseReferenceConexiones.keepSynced(true)
 
     }
@@ -160,22 +158,13 @@ class AnadirJugadoresActivity : AppCompatActivity() {
 
     fun jugar(view: View) {
         val intent = Intent(this, PreguntaActivity::class.java)
-        intent.putExtra(EscogerGrupoActivity.Constants.PREGUNTAS, preguntas)
+
+        val extras = Bundle()
+        extras.putIntArray(EscogerGrupoActivity.Constants.PREGUNTAS, preguntas)
+        extras.putInt(EscogerGrupoActivity.Constants.PUNTAJE, -1)
+        intent.putExtras(extras)
+
         startActivity(intent)
-    }
-
-    fun printQuestions() {
-
-        val default:Set<String> = hashSetOf("No se encontró nada", "quizas si")
-
-        var test: Set<String> =  prefs!!.getStringSet("Pregunta2",default)
-        println("test 1 anadir $test")
-
-        test =  prefs!!.getStringSet("Pregunta4",default)
-        println("test 2 anadir $test")
-
-        var test2 =  prefs!!.getStringSet("Pregunta8",default)
-        println("test 5 anadir $test2")
     }
 
 }

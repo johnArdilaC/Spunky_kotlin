@@ -62,6 +62,8 @@
 
     <string name="label_conexion">En este momento no tienes conexión a internet. Puedes agregar a tus amigos por Bluetooth o encender tu conexión a internet.</string>
     <string name="label_conexion_bluetooth">En este momento no tienes conexión a internet. Puedes unirte al juego via bluetooth.</string>
+    <string name="label_conexion_nobluetooth_nowifi">En este momento no tienes conexión a internet, y tu dispositivo no tiene bluetooth. Por favor vuelve a intentar cuando tengas conexion a internet</string>
+
 
     <string name="button_bluetooth">Usar bluetooth</string>
     <string name="label_bluetooth">Tu dispositivo no soporta Bluetooth, intenta conectarte nuevamente utilizando internet.</string>
@@ -81,6 +83,22 @@
     <string name="button_continue_internet">Continuar con internet</string>
     <string name="button_continue_bluetooth">Usar bluetooth</string>
     <string name="label_errorReto">Por Favor Escribe un Reto</string>
+
+
+    <string name="txt_resultados">Tabla de resultados</string>
+    <string name="button_enviar_reto">Enviar reto</string>
+    <string name="title_activity_record_memory">RecordMemoryActivity</string>
+    <string name="title_activity_take_photo">TakePhotoActivity</string>
+    <string name="title_activity_take_video">TakeVideoActivity</string>
+    <string name="toma_un_video">Toma un Video</string>
+    <string name="salir">SALIR</string>
+    <string name="play">PLAY</string>
+    <string name="capturar_nuevo_recuerdo">CAPTURAR NUEVO RECUERDO</string>
+    <string name="magnifico_video">¡Magnifico Video!</string>
+    <string name="toma_una_fotografia">Toma una Fotografia</string>
+    <string name="recuerda_este_momento">¡Recuerda este momento!</string>
+    <string name="label_nickname_error">Por favor ingresa un apodo</string>
+    <string name="proximamente">Proximamente</string>
 
 
 </resources>

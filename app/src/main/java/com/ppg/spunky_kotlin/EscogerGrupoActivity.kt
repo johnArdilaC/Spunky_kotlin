@@ -25,6 +25,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
 
     object Constants{
         val PREGUNTAS = "com.ppg.spunky.PREGUNTAS"
+        val PUNTAJE= "com.ppg.spunky.PUNTAJE"
         val PREFS_FILENAME = "com.ppg.spunky.prefs"
     }
 
@@ -47,9 +48,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
     private var prefs: SharedPreferences? = null
     private var prefsBD: SharedPreferences? = null
 
-    //Atributo que indica si hay conexión
     private var isConnected: Boolean = false
-    private val REQUEST_ENABLE_BT = 1
     private var changeReceiver: NetworkChangeReceiver = NetworkChangeReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -129,9 +128,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
      */
 
     private fun oprimirSiguiente(){
-        val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = cm.activeNetworkInfo
-        //var isConnected = connectivity()
+
         //Una card seleccionada
         if(groupView.any { it.isChecked }){
             grupoSeleccionado=findCheckedGroup()
@@ -214,7 +211,6 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
     /**
      *-------------------- Inicializar cosas con conexion------------------
      */
-
     /**
      * Inicializa las preguntas dado el grupo y las edades escogidas
      */

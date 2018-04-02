@@ -105,6 +105,7 @@
         android:text="@string/button_unirme"
         tools:text="@string/button_unirme"
         android:textSize="50sp"
+        android:onClick="obtenerConexiones"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

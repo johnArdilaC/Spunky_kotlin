@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background402x"
-    tools:context="com.ppg.spunky_kotlin.EnviarRetoActivity">
+    tools:context="com.ppg.spunky_kotlin.EnviarRetoGiroActivity">
 
     <TextView
         android:id="@+id/text55"

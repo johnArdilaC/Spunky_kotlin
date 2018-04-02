@@ -49,8 +49,6 @@ class NetworkChangeReceiver : BroadcastReceiver() {
     private fun getConnectivityStatus(context: Context): Int {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-
-
         val activeNetwork = cm.activeNetworkInfo
         if (null != activeNetwork) {
 
