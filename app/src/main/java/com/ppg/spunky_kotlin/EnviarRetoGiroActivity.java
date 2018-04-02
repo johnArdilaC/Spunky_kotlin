@@ -129,7 +129,7 @@ public class EnviarRetoGiroActivity extends AppCompatActivity {
                 .setTitle("Error")
                 .setNeutralButton(R.string.button_volver, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
+                        launchRecordGiro();
                     }
                 });
         AlertDialog dialog = builder.create();
@@ -147,6 +147,10 @@ public class EnviarRetoGiroActivity extends AppCompatActivity {
 
     private void launchRecord() {
         Intent intent = new Intent(this, RecordMemoryActivity.class);
+        startActivity(intent);
+    }
+    private void launchRecordGiro() {
+        Intent intent = new Intent(this, EnviarRetoGiroActivity.class);
         startActivity(intent);
     }
 }

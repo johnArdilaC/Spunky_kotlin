@@ -32,10 +32,10 @@
             android:fontFamily="@font/cabin"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
+            android:textSize="40sp"
             android:text="@string/trivia_desc"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/slide_desc" />
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
