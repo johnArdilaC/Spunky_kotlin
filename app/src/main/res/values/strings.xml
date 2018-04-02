@@ -100,5 +100,13 @@
     <string name="label_nickname_error">Por favor ingresa un apodo</string>
     <string name="proximamente">Proximamente</string>
 
+    <string name="label_code_missing">Por favor espera a que un código sea asignado al juego para empezar</string>
+    <string name="btn_volver_jugar">Volver a jugar</string>
+    <string name="label_escribe_reto">Escribe el Reto</string>
+    <string name="label_enviar_reto">Enviar reto</string>
+    <string name="label_envia_un_reto">¡Envia un Reto!</string>
+    <string name="label_gira_derecha">¡Gira tu telefono a la derecha para enviar el reto!</string>
+    <string name="label_first_no_internet">Por favor conéctate a internet para descargar las juegos</string>
+
 
 </resources>

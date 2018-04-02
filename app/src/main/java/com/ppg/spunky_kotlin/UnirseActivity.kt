@@ -16,16 +16,16 @@ import kotlinx.android.synthetic.main.activity_unirse.*
 
 class UnirseActivity : AppCompatActivity() {
 
-    private var mRootDB: FirebaseDatabase =FirebaseDatabase.getInstance()
+    private var mRootDB: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var conexionesReference: DatabaseReference = mRootDB.reference.child("Conexiones")
     private val preguntasReference: DatabaseReference = mRootDB.reference.child("Juegos").child("PreguntasTrivia")
 
-    private var android_id: String?=null
-    private var preguntas: String?=null
+    private var android_id: String? = null
+    private var preguntas: String? = null
 
     private var prefs: SharedPreferences? = null
 
-    private var apodotxt:String=""
+    private var apodotxt: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         android_id = Settings.Secure.getString(this.contentResolver,
@@ -47,10 +47,9 @@ class UnirseActivity : AppCompatActivity() {
 
         apodotxt = editTextApodo.text.toString()
 
-        if(apodotxt.trim()==""){
-            showAlertDialog(R.string.label_nickname_error,R.string.title_error)
-        }
-        else {
+        if (apodotxt.trim() == "") {
+            showAlertDialog(R.string.label_nickname_error, R.string.title_error)
+        } else {
 
             //Listener base de datos
             val listenerConexiones = object : ValueEventListener {
@@ -76,7 +75,7 @@ class UnirseActivity : AppCompatActivity() {
 
     }
 
-    private fun showAlertDialog(msg:Int,title:Int){
+    private fun showAlertDialog(msg: Int, title: Int) {
         val builder = AlertDialog.Builder(this@UnirseActivity)
         builder.setMessage(msg)
                 .setTitle(title)
@@ -89,32 +88,29 @@ class UnirseActivity : AppCompatActivity() {
      * Pasa de "{5,3,6}" a un array de ints
      */
     private fun procesarPreguntas() {
-        val preg = preguntas!!.replace("{", "").replace("}", "")
-        Log.e("preguntas", preg)
-        val preguntasSeparadas = preg.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        val idsPreguntas = IntArray(preguntasSeparadas.size)
+        val preguntas = preguntas!!.replace("{", "").replace("}", "").split(",")
+        Log.e("preguntas", preguntas.toString())
+        val idsPreguntas = IntArray(preguntas.size)
 
         for (i in idsPreguntas.indices) {
-
-            idsPreguntas[i] = preguntasSeparadas[i].toInt()
+            idsPreguntas[i] = preguntas[i].trim().toInt()
         }
 
         idsPreguntas.forEach {
-            Log.e("ids preguntas", it.toString())
-            initPreguntas(it) }
-
-        for (j in preguntasSeparadas.indices) {
-            idsPreguntas[j] = Integer.parseInt(preguntasSeparadas[j])
-
-            val intent = Intent(this, PreguntaActivity::class.java)
-            val extras = Bundle()
-            extras.putIntArray(EscogerGrupoActivity.Constants.PREGUNTAS, idsPreguntas)
-            extras.putInt(EscogerGrupoActivity.Constants.PUNTAJE, -1)
-            intent.putExtras(extras)
-            startActivity(intent)
+            initPreguntas(it)
         }
 
+        val intent = Intent(this, PreguntaActivity::class.java)
+
+        val extras = Bundle()
+        extras.putIntArray(EscogerGrupoActivity.Constants.PREGUNTAS, idsPreguntas)
+        extras.putInt(EscogerGrupoActivity.Constants.PUNTAJE, -1)
+        intent.putExtras(extras)
+        startActivity(intent)
     }
+
+
+
 
     /**
      * Busca la pregunta en la base de datos e inicializa los textos de la pregunta y las respuestas

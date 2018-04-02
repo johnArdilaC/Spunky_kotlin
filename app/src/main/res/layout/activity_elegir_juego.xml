@@ -28,21 +28,19 @@
         android:layout_above="@id/layoutDots"
         android:background="@android:color/white" />
 
-
-
     <Button
         android:id="@+id/btn_jugarCharadas"
         android:layout_height="137dp"
         android:layout_width="300dp"
         android:background="@drawable/my_button"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="250dp"
-        android:layout_marginRight="250dp"
+        android:layout_centerInParent="true"
         android:text="@string/jugar_charadas"
-        android:textColor="@android:color/white"
         android:textSize="25sp"
-        android:visibility="visible" />
+        android:layout_marginBottom="100dp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        />
 
     <Button
         android:id="@+id/btn_jugarTrivia"
@@ -50,13 +48,13 @@
         android:layout_width="300dp"
         android:background="@drawable/my_button"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
         android:visibility="gone"
         android:text="@string/jugar_trivia"
         android:textSize="25sp"
-        android:layout_marginBottom="250dp"
-        android:layout_marginRight="250dp"
-        android:textColor="@android:color/white" />
+        android:layout_marginBottom="100dp"
+        android:gravity="center"
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/btn_jugarVerdad"
@@ -64,12 +62,13 @@
         android:layout_width="300dp"
         android:background="@drawable/my_button"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
         android:visibility="gone"
         android:text="@string/jugar_verdad"
         android:textSize="25sp"
-        android:layout_marginBottom="250dp"
-        android:layout_marginRight="250dp"
+        android:layout_marginBottom="100dp"
+        android:gravity="center"
+
         android:textColor="@android:color/white" />
 
 </RelativeLayout>

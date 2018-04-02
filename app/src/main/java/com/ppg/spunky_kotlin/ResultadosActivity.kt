@@ -20,7 +20,6 @@ class ResultadosActivity : AppCompatActivity() {
 
     private var hayGiro: Boolean = false
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resultados)
@@ -50,9 +49,6 @@ class ResultadosActivity : AppCompatActivity() {
             val intent = Intent(this, EnviarRetoActivity::class.java)
             startActivity(intent)
         }
-
-
-
     }
 
     fun verificarGiro()

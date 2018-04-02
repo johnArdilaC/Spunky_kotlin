@@ -59,8 +59,8 @@ public class UnirseBlueActivity extends AppCompatActivity {
         setContentView(R.layout.activity_unirseblue);
         blueAdapter = BluetoothAdapter.getDefaultAdapter();
         findViewById();
-        //getWindow().setSoftInputMode(
-          //      WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
             if(!blueAdapter.isEnabled()){
                 Intent enableIntent=new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableIntent,REQUEST_ENABLE_BLUE);
@@ -70,7 +70,6 @@ public class UnirseBlueActivity extends AppCompatActivity {
     }
 
     private void implementListeners() {
-        System.out.println("ENTRA A IMPLEMENT LISTENERS");
 
         listDevices.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +78,6 @@ public class UnirseBlueActivity extends AppCompatActivity {
                 String[] strings= new String[bt.size()];
                 btArray=new  BluetoothDevice[bt.size()];
                 int index=0;
-                System.out.println("ENTRA A LIST DEVICES");
                 Log.e("LIST DEVICES ", "HELP");
                 if(bt.size()>0){
                     for (BluetoothDevice device: bt){
