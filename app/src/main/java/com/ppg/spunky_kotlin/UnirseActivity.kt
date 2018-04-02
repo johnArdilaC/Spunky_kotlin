@@ -15,17 +15,17 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_unirse.*
 
 class UnirseActivity : AppCompatActivity() {
+
     private var mRootDB: FirebaseDatabase =FirebaseDatabase.getInstance()
     private var conexionesReference: DatabaseReference = mRootDB.reference.child("Conexiones")
-    private var android_id: String?=null
-    private var preguntas: String?=null
     private val preguntasReference: DatabaseReference = mRootDB.reference.child("Juegos").child("PreguntasTrivia")
 
-    private var isConnected: Boolean = false
-    private var changeReceiver: NetworkChangeReceiver = NetworkChangeReceiver()
+    private var android_id: String?=null
+    private var preguntas: String?=null
 
     private var prefs: SharedPreferences? = null
 
+    private var apodotxt:String=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         android_id = Settings.Secure.getString(this.contentResolver,
@@ -38,17 +38,14 @@ class UnirseActivity : AppCompatActivity() {
 
         prefs = applicationContext.getSharedPreferences(EscogerGrupoActivity.Constants.PREFS_FILENAME, Context.MODE_PRIVATE)
 
-
         conexionesReference.keepSynced(true)
     }
 
     fun obtenerConexiones(view: View) {
-        //Obtener código del juego
-        val codigo = editTextUnirse
-        val texto = codigo.text.toString()
-        //Obtener apodo del jugador
-        val apodo = editTextApodo
-        val apodotxt = apodo.text.toString()
+
+        val codigo = editTextUnirse.text.toString()
+
+        apodotxt = editTextApodo.text.toString()
 
         if(apodotxt.trim()==""){
             showAlertDialog(R.string.label_nickname_error,R.string.title_error)
@@ -59,10 +56,10 @@ class UnirseActivity : AppCompatActivity() {
             val listenerConexiones = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                    if (dataSnapshot.hasChild(texto)) {
+                    if (dataSnapshot.hasChild(codigo)) {
                         if (preguntas == null) {
-                            conexionesReference.child(texto).child(android_id!!).setValue(apodotxt)
-                            preguntas = dataSnapshot.child(texto).child(AnadirJugadoresActivity.PREGUNTAS).value!!.toString()
+                            conexionesReference.child(codigo).child(android_id!!).setValue(apodotxt)
+                            preguntas = dataSnapshot.child(codigo).child(AnadirJugadoresActivity.PREGUNTAS).value!!.toString()
                             procesarPreguntas()
                         }
                     } else {
@@ -132,7 +129,9 @@ class UnirseActivity : AppCompatActivity() {
         val editor = prefs!!.edit()
 
         editor.clear()
-        editor.commit()
+        editor.putString(EscogerGrupoActivity.Constants.APODO, apodotxt)
+
+        editor.apply()
 
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {

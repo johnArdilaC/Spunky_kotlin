@@ -27,6 +27,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         val PREGUNTAS = "com.ppg.spunky.PREGUNTAS"
         val PUNTAJE= "com.ppg.spunky.PUNTAJE"
         val PREFS_FILENAME = "com.ppg.spunky.prefs"
+        val APODO = "com.ppg.spunky.APODO"
     }
 
     //Firebase vars
@@ -65,6 +66,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         //Shared preferences
         prefs = applicationContext.getSharedPreferences(Constants.PREFS_FILENAME, Context.MODE_PRIVATE)
         prefsBD = applicationContext.getSharedPreferences(MainActivity.Constants.PREGUNTAS_BD, Context.MODE_PRIVATE)
+
 
     }
 
@@ -252,6 +254,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
                 println("preguntas totales en grupo "+preguntasTotales.toString())
 
                 preguntasAptas = preguntasTotales.distinct().toMutableList()
+                preguntasAptas.shuffle()
                 val preguntasFinales = IntArray(preguntasAptas.size)
                 for (j in preguntasAptas.indices) {
 
@@ -259,6 +262,8 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
                 }
                 println("total APTAS  $preguntasAptas")
                 println("total Finales $preguntasFinales")
+
+
 
                 launchNextActivity(preguntasFinales)
 
@@ -308,6 +313,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         val editor = prefs!!.edit()
 
         editor.clear()
+        editor.putString(Constants.APODO, "HOST")
         editor.commit()
 
         query.addValueEventListener(object : ValueEventListener {
@@ -398,6 +404,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         val default:Set<String> = hashSetOf("No se encontró la pregunta")
 
         val editor = prefs!!.edit()
+
         editor.clear()
 
         val setPregunta: Set<String> =  prefsBD!!.getStringSet("Pregunta$idPregunta",default)
@@ -405,6 +412,7 @@ class EscogerGrupoActivity : AppCompatActivity(),View.OnClickListener {
         Log.e("Pregunta $idPregunta no conn", setPregunta.toString() )
 
         editor.putStringSet("Pregunta$idPregunta", setPregunta)
+        editor.putString(Constants.APODO, "HOST")
         editor.commit()
     }
 
