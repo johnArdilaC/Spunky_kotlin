@@ -79,15 +79,19 @@ public class EnviarRetoGiroActivity extends AppCompatActivity {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
                 String string=String.valueOf(writeRetoGiro.getText());
-                if(string.trim().equals("")){
-                    createMessage(R.string.label_errorReto);
-                }
-                else{
                     if (sensorEvent.values[2] < -1.5f) {
-                        toastMessage();
-                        Delay(2500);
+                        if(string.trim().equals("")){
+                                createMessage(R.string.label_errorReto);
+                        }
+                        else{
+                            toastMessage();
+                            Delay(2500);
+                            sensorManager.unregisterListener(gyroscopeEventListener);
+                        }
+
+
                     }
-                }
+
             }
             @Override
             public void onAccuracyChanged(Sensor sensor, int i) {

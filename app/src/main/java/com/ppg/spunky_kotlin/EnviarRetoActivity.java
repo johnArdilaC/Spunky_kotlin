@@ -20,12 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-/**
- * Created by John on 01/04/2018.
- */
-
-
-
 public class EnviarRetoActivity extends AppCompatActivity {
 
     Button sendReto;

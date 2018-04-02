@@ -18,6 +18,8 @@ class ResultadosActivity : AppCompatActivity() {
     private var sensorManager: SensorManager? = null
     private var prefs: SharedPreferences? = null
 
+    private var hayGiro: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,19 +31,39 @@ class ResultadosActivity : AppCompatActivity() {
 
         val puntaje=intent.getIntExtra(EscogerGrupoActivity.Constants.PUNTAJE, 0)
 
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager?
+        gyroscope = sensorManager!!.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+        verificarGiro()
 
         val text = "1.$apodo: $puntaje puntos"
+
 
         text_resultado.text = text
     }
 
     fun enviarReto(view: View) {
+        if(hayGiro){
+            val intent = Intent(this, EnviarRetoGiroActivity::class.java)
+            startActivity(intent)
+        }
+        else{
             val intent = Intent(this, EnviarRetoActivity::class.java)
             startActivity(intent)
+        }
+
 
 
     }
 
+    fun verificarGiro()
+    {
+        if(gyroscope==null){
+            println("NO HAY GIROSCOPIO")
+        }
+        else{
+            hayGiro=true
+        }
+    }
 
 
 }
