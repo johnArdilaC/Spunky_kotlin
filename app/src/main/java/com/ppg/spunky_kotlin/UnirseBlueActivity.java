@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -69,7 +70,6 @@ public class UnirseBlueActivity extends AppCompatActivity {
 
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
             if(!blueAdapter.isEnabled()){
                 Intent enableIntent=new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableIntent,REQUEST_ENABLE_BLUE);
@@ -78,6 +78,7 @@ public class UnirseBlueActivity extends AppCompatActivity {
     }
 
     private void implementListeners() {
+
         listDevices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +90,7 @@ public class UnirseBlueActivity extends AppCompatActivity {
                 String[] strings= new String[bt.size()];
                 btArray=new  BluetoothDevice[bt.size()];
                 int index=0;
-
+                Log.e("LIST DEVICES ", "HELP");
                 if(bt.size()>0){
                     for (BluetoothDevice device: bt){
                         btArray[index]=device;
@@ -204,6 +205,7 @@ public class UnirseBlueActivity extends AppCompatActivity {
 
         public  void run(){
             try {
+                System.out.println("ENTRA AL TRY DE SOCKET");
                 socket.connect();
                 Message message = Message.obtain();
                 message.what=STATE_CONNECTED;

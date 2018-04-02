@@ -64,12 +64,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
 
         val editor = prefsBD!!.edit()
 
+        isConnected = !(changeReceiver.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED)
+
+
         if(isConnected){
             guardarEdades(editor)
             guardarGrupos(editor)
             guardarPreguntas(editor)
         }
-
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(WEB_CLIENT_ID)
@@ -103,13 +105,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
 
     private fun escogerGrupo()
     {
-        val intent = Intent(this, EscogerGrupoActivity::class.java)
-        startActivity(intent)
+        if(!isConnected&&!prefsBD!!.contains(Constants.PREGUNTAS_BD)){
+            val builder = AlertDialog.Builder(this@MainActivity)
+            builder.setMessage(R.string.label_first_no_internet)
+                    .setTitle(R.string.label_informacion)
+                    .setPositiveButton(R.string.button_ok, DialogInterface.OnClickListener { dialog, id ->})
+            val dialog = builder.create()
+            dialog.show()
+        }
+        else{
+            val intent = Intent(this, EscogerGrupoActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun crearJuego()
     {
-        val intent = Intent(this, AnadirJugadoresBlueActivity::class.java)
+        val intent = Intent(this, EnConstruccionActivity::class.java)
         startActivity(intent)
     }
 
@@ -121,7 +134,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
         val mBluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
 
 
-        isConnected = !(changeReceiver.getConnectivityStatusString(applicationContext) == NetworkChangeReceiver.NETWORK_STATUS_NOT_CONNECTED)
 
         //Si tiene internet, mandar cuadro de dialogo preguntando si quiere por wifi o bluetooth
         if(isConnected  ){

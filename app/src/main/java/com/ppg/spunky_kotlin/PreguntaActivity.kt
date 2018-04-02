@@ -170,7 +170,6 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
         val preguntasSiguientes = IntArray(preguntas.size - 1)
 
         val extras = Bundle()
-        extras.putIntArray(EscogerGrupoActivity.Constants.PREGUNTAS, preguntasSiguientes)
         extras.putInt(EscogerGrupoActivity.Constants.PUNTAJE, puntaje)
 
         if (preguntas.size > 1) {
@@ -178,6 +177,7 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
                 preguntasSiguientes[i - 1] = preguntas[i]
             }
             val intent = Intent(this, PreguntaActivity::class.java)
+            extras.putIntArray(EscogerGrupoActivity.Constants.PREGUNTAS, preguntasSiguientes)
             intent.putExtras(extras)
             startActivity(intent)
             finish()
@@ -292,12 +292,12 @@ class PreguntaActivity : AppCompatActivity(), View.OnClickListener, SensorEventL
                 }
             } else {
                 val r = Math.round(Math.toDegrees(Math.atan2(g[0], g[1]))).toInt()
-                    if (r < -5 ) {
+                    if (r < -8 ) {
                         println("Tilt right $inclination $r $x  $y $z")
                         validar(card_b)
                         mSensorManager!!.unregisterListener(this)
                     }
-                    if (r > 7) {
+                    if (r > 8) {
                         println("Tilt left $inclination  $r $x  $y $z")
                         validar(card_a)
                         mSensorManager!!.unregisterListener(this)

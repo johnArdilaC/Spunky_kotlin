@@ -1,12 +1,15 @@
 package com.ppg.spunky_kotlin
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import com.google.firebase.database.*
@@ -114,20 +117,20 @@ class AnadirJugadoresActivity : AppCompatActivity() {
                     //Escribe al host en la BD
                     mDatabaseReferenceConexiones.child(codigo).child(android_id).setValue(HOST)
                     //Escribe las preguntas en la BD
-                    mDatabaseReferenceConexiones.child(codigo).child(PREGUNTAS).setValue(traducirPreguntas())
+                    val preguntasString = preguntas.toMutableList().toString().replace("[","{").replace("]","}")
+
+                    mDatabaseReferenceConexiones.child(codigo).child(PREGUNTAS).setValue(preguntasString)
                     escribirBD = ESCRITO
                 } else if (escribirBD == ESCRITO) {
-                    println("DATASNAPSHOT: " + dataSnapshot.child(codigo).value.toString())
-                    val jugadores = dataSnapshot.child(codigo).children
 
-                    for (j in jugadores) {
-                        println("JUGADOR: " + j.value.toString())
-                        val llave = j.key
-                        if (llave != PREGUNTAS && j.value.toString() != HOST) {
-                            apodos+=j.value!!.toString()
-                            println("ESCRIBE JUGADOR: " + j.value.toString())
+                    val jugadores = dataSnapshot.child(codigo).children
+                    jugadores.forEach {
+                        val llave = it.key
+                        if (llave != PREGUNTAS && it.value.toString() != HOST) {
+                            apodos+=it.value!!.toString()
                         }
                     }
+
                     arrayAdapter = ArrayAdapter(this@AnadirJugadoresActivity, android.R.layout.simple_list_item_1, apodos)
                     listView.adapter = arrayAdapter
                 }
@@ -141,30 +144,28 @@ class AnadirJugadoresActivity : AppCompatActivity() {
         mDatabaseReferenceConexiones.addValueEventListener(listenerConexiones)
     }
 
-    /**
-     * Pasa las preguntas de array de numeros a un string "{2,3,4}" para setearlo en la BD
-     */
-    private fun traducirPreguntas(): String {
-        var pTraducidas = "{"
-        for (i in preguntas!!.indices) {
-            if (i < preguntas!!.size - 1)
-                pTraducidas += preguntas!![i].toString() + ","
-            else {
-                pTraducidas += preguntas!![i].toString() + "}"
-            }
-        }
-        return pTraducidas
-    }
-
     fun jugar(view: View) {
-        val intent = Intent(this, PreguntaActivity::class.java)
 
-        val extras = Bundle()
-        extras.putIntArray(EscogerGrupoActivity.Constants.PREGUNTAS, preguntas)
-        extras.putInt(EscogerGrupoActivity.Constants.PUNTAJE, -1)
-        intent.putExtras(extras)
+        if(textViewCodigo.text!="-"){
+            val intent = Intent(this, PreguntaActivity::class.java)
 
-        startActivity(intent)
+            val extras = Bundle()
+            extras.putIntArray(EscogerGrupoActivity.Constants.PREGUNTAS, preguntas)
+            extras.putInt(EscogerGrupoActivity.Constants.PUNTAJE, -1)
+            intent.putExtras(extras)
+
+            startActivity(intent)
+        }
+        else{
+            val builder = AlertDialog.Builder(this@AnadirJugadoresActivity)
+            builder.setMessage(R.string.label_code_missing )
+                    .setTitle(R.string.label_informacion)
+                    .setPositiveButton(R.string.button_ok, DialogInterface.OnClickListener { dialog, id -> })
+            val dialog = builder.create()
+            dialog.show()
+        }
+
+
     }
 
 }

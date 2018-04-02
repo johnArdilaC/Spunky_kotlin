@@ -33,62 +33,43 @@
         android:id="@+id/LPregunta"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="650dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="70dp"
         android:fontFamily="@font/cabin"
-        android:gravity="center_vertical|end"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
-        android:textSize="59sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LRonda" />
 
+        app:layout_constraintTop_toBottomOf="@+id/LRonda"
+        app:layout_constraintVertical_bias="0.3" />
 
-    <!-- Row 2 -->
-
-    <!-- Column 1 -->
-    <com.ppg.spunky_kotlin.cardview.CheckableCardView
-        android:id="@+id/card_c"
-        android:layout_width="354dp"
-        android:layout_height="199dp"
-        android:layout_marginBottom="101dp"
-        android:layout_marginEnd="384dp"
-        android:layout_marginStart="384dp"
-        android:layout_marginTop="40dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:tag="c"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groupGrid" />
 
     <GridLayout
         android:id="@+id/groupGrid"
         android:layout_width="0dp"
-        android:layout_height="223dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginEnd="40dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_weight="8"
         android:alignmentMode="alignMargins"
         android:columnCount="2"
         android:columnOrderPreserved="false"
         android:padding="0dp"
         android:rowCount="1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LPregunta"
-        app:layout_constraintVertical_bias="0.152">
+        app:layout_constraintTop_toBottomOf="@+id/guideline3"
+        app:layout_constraintVertical_bias="0.3">
 
         <!-- Row 1 -->
 
@@ -106,7 +87,6 @@
             android:tag="a"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
-
             />
 
         <!-- Column 2 -->
@@ -139,6 +119,66 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp" />-->
+
+
+    <!-- Row 2 -->
+
+    <!-- Column 1 -->
+    <com.ppg.spunky_kotlin.cardview.CheckableCardView
+        android:id="@+id/card_c"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:tag="c"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@id/guideline5"
+        app:layout_constraintStart_toStartOf="@id/guideline4"
+
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@+id/guideline1" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.72" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.27" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.72" />
+
+
 
 
 </android.support.constraint.ConstraintLayout>

@@ -110,6 +110,7 @@ class ElegirJuegoActivity : AppCompatActivity() {
         val colorsInactive = resources.getIntArray(R.array.array_dot_inactive)
 
         layoutDots.removeAllViews()
+
         for (i in dots.indices) {
             dots[i] = TextView(this)
             dots[i]?.text = Html.fromHtml("&#8226;")
@@ -118,7 +119,7 @@ class ElegirJuegoActivity : AppCompatActivity() {
             layoutDots.addView(dots[i])
         }
 
-        if (dots.size > 0)
+        if (dots.isNotEmpty())
             dots[currentPage]?.setTextColor(colorsActive[currentPage])
     }
 
@@ -160,8 +161,8 @@ class ElegirJuegoActivity : AppCompatActivity() {
         }
 
 
-        override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-            val view = `object` as View
+        override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
+            val view = obj as View
             container.removeView(view)
         }
     }
@@ -181,8 +182,10 @@ class ElegirJuegoActivity : AppCompatActivity() {
 
         fun enableVisibility(btn:Button){
             btnsJugar.forEach {
-                if(it.equals(btn)) it.visibility=View.VISIBLE
-                else    it.visibility=View.GONE
+                if(it==btn)
+                    it.visibility=View.VISIBLE
+                else
+                    it.visibility=View.GONE
             }
         }
 
