@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, GoogleApiClient.
 
     private fun crearJuego()
     {
-        val intent = Intent(this, ResultadosActivity::class.java)
+        val intent = Intent(this, EnConstruccionActivity::class.java)
         startActivity(intent)
     }
 

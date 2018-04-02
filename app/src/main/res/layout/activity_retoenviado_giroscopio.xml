@@ -16,7 +16,7 @@
         android:text="@string/label_envia_un_reto"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
-        android:textSize="70sp"
+        android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/writeRetoGiro"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,12 +32,13 @@
         android:layout_height="111dp"
         android:fontFamily="@font/cabin"
         android:paddingHorizontal="5sp"
+        android:layout_marginBottom="12dp"
         android:text="@string/label_gira_derecha"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
+        app:layout_constraintBottom_toTopOf="@+id/guideline1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,13 +47,13 @@
 
     <EditText
         android:id="@+id/writeRetoGiro"
-        android:layout_width="464dp"
+        android:layout_width="match_parent"
         android:layout_height="104dp"
         android:ems="10"
         android:hint="@string/label_escribe_reto"
         android:inputType="textMultiLine"
         android:textColor="@color/colorWhite"
-        android:textSize="40sp"
+        android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/text44"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -60,15 +61,25 @@
         app:layout_constraintTop_toBottomOf="@+id/text55"
         tools:ignore="MissingConstraints" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/imageButton2"
-        android:layout_width="256dp"
-        android:layout_height="213dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline1"
+        app:layout_constraintBottom_toBottomOf=" parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/btn_star_big_on"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="696dp" />
+        app:srcCompat="@drawable/arrowphone"
+        tools:layout_editor_absoluteY="613dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.54" />
 
 </android.support.constraint.ConstraintLayout>
