@@ -3,9 +3,11 @@ package com.ppg.spunky_kotlin;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,10 +21,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Set;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -31,15 +35,19 @@ import java.util.UUID;
 
 public class UnirseBlueActivity extends AppCompatActivity {
 
+    private BluetoothDevice deviceServer;
     Button send, listDevices;
     ListView listView;
     TextView msgBox, status;
     EditText writeMsg;
 
     BluetoothAdapter blueAdapter;
-    BluetoothDevice[] btArray;
+    ArrayList<BluetoothDevice>btArray;
 
     SendReceived sendReceived;
+    Boolean esPosibleEnviar;
+    ArrayList nearDevices;
+    ArrayAdapter arrayAdapter;
 
     static  final int STATE_LISTENING=1;
     static  final int STATE_CONNECTING=2;
@@ -58,21 +66,26 @@ public class UnirseBlueActivity extends AppCompatActivity {
         setContentView(R.layout.activity_unirseblue);
         blueAdapter = BluetoothAdapter.getDefaultAdapter();
         findViewById();
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
             if(!blueAdapter.isEnabled()){
                 Intent enableIntent=new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableIntent,REQUEST_ENABLE_BLUE);
-                implementListeners();
             }
+        implementListeners();
     }
 
     private void implementListeners() {
         listDevices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ///USE THIS CODE IF YOU WANT TO KNOW THE PRIVIUSLY BONDED DEVICES
+                /**
                 Set<BluetoothDevice> bt=blueAdapter.getBondedDevices();
+
                 String[] strings= new String[bt.size()];
                 btArray=new  BluetoothDevice[bt.size()];
                 int index=0;
@@ -86,6 +99,12 @@ public class UnirseBlueActivity extends AppCompatActivity {
                     ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,strings);
                     listView.setAdapter(arrayAdapter);
                 }
+                */
+
+                IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+                intentFilter.addAction(BluetoothDevice.ACTION_NAME_CHANGED);
+                registerReceiver(broadcastReceiver, intentFilter);
+                blueAdapter.startDiscovery();
             }
         });
 
@@ -93,7 +112,14 @@ public class UnirseBlueActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ClientClass clientClass = new ClientClass(btArray[i]);
+                String textItemList = (String) listView.getItemAtPosition(i);
+                for(int j=0; j<btArray.size(); j++){
+                    String name = btArray.get(j).getName();
+                    if(name.equalsIgnoreCase(textItemList)){
+                        deviceServer=btArray.get(j);
+                    }
+                }
+                ClientClass clientClass = new ClientClass(deviceServer);
                 clientClass.start();
                 status.setText("Connecting");
             }
@@ -102,8 +128,16 @@ public class UnirseBlueActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String string=String.valueOf(writeMsg.getText());
-                sendReceived.write(string.getBytes());
+                if(esPosibleEnviar==true){
+                    String string=String.valueOf(writeMsg.getText());
+                    if(string.trim().equals("")){
+                        crearMensaje(R.string.label_nickname_error);
+                    }else{
+                        sendReceived.write(string.getBytes());
+                    }
+                }else{
+                    toastMessage();
+                }
             }
         });
 
@@ -146,6 +180,10 @@ public class UnirseBlueActivity extends AppCompatActivity {
         msgBox=(TextView) findViewById(R.id.msg);
         status=(TextView) findViewById(R.id.status);
         writeMsg=(EditText) findViewById(R.id.writeApodo);
+        nearDevices=new ArrayList<String>();
+        btArray=new ArrayList<BluetoothDevice>();
+        esPosibleEnviar=false;
+
     }
 
 
@@ -170,7 +208,7 @@ public class UnirseBlueActivity extends AppCompatActivity {
                 Message message = Message.obtain();
                 message.what=STATE_CONNECTED;
                 handler.sendMessage(message);
-
+                esPosibleEnviar=true;
                 ///OJOOOO
                 sendReceived=new SendReceived(socket);
                 sendReceived.start();
@@ -243,6 +281,39 @@ public class UnirseBlueActivity extends AppCompatActivity {
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void toastMessage(){
+        Context context = getApplicationContext();
+        CharSequence text = "Error: No puedes enviar un apodo sin antes conectarte";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
+                //discovery starts, we can show progress dialog or perform other tasks
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                //discovery finishes, dismis progress dialog
+            } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                //bluetooth device found
+                BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                btArray.add(device);
+                nearDevices.add(device.getName());
+                arrayAdapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,nearDevices);
+                listView.setAdapter(arrayAdapter);
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(broadcastReceiver);
     }
 }
 

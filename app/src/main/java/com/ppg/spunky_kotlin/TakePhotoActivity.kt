@@ -41,6 +41,9 @@ class TakePhotoActivity : AppCompatActivity() {
             val imageBitmap = extras!!.get("data") as Bitmap
             photoView.setImageBitmap(imageBitmap)
         }
+        else{
+            launchTakeOtherPhotoActivity()
+        }
     }
 
     private fun launchTakeOtherPhotoActivity() {

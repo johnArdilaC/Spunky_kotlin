@@ -3,16 +3,25 @@ package com.ppg.spunky_kotlin;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -28,9 +37,12 @@ public class AnadirJugadoresBlueActivity extends AppCompatActivity {
     Button listen, send;
     TextView msgBox, status;
     EditText writeMsg;
+    ListView listView;
 
     BluetoothAdapter blueAdapter;
     SendReceived sendReceived;
+
+    Boolean esPosibleEnviar;
 
     static  final int STATE_LISTENING=1;
     static  final int STATE_CONNECTING=2;
@@ -61,8 +73,11 @@ public class AnadirJugadoresBlueActivity extends AppCompatActivity {
     private void implementListeners() {
 
         listen.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
+               
+
                 ServerClass serverClass=new ServerClass();
                 serverClass.start();
             }
@@ -71,16 +86,24 @@ public class AnadirJugadoresBlueActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+            if (esPosibleEnviar==true){
                 String string=String.valueOf(writeMsg.getText());
                 if(string.trim().equals("")){
-
+                createMessage(R.string.label_nickname_error);
                 }
                 else{
                     Log.e("valor string", string);
                     sendReceived.write(string.getBytes());
                 }
             }
+            else{
+                toastMessage();
+            }
+
+            }
         });
+
+        //listView
 
     }
 
@@ -121,6 +144,8 @@ public class AnadirJugadoresBlueActivity extends AppCompatActivity {
         msgBox=(TextView) findViewById(R.id.msg);
         status=(TextView) findViewById(R.id.status);
         writeMsg=(EditText) findViewById(R.id.writeApodo);
+        listView=(ListView) findViewById(R.id.gamersList);
+        esPosibleEnviar=false;
     }
 
 
@@ -158,9 +183,10 @@ public class AnadirJugadoresBlueActivity extends AppCompatActivity {
                     handler.sendMessage(message);
 
                     //write some code for send/recieve
-
+                    esPosibleEnviar=true;
                     sendReceived=new SendReceived(socket);
                     sendReceived.start();
+
                     break;
                 }
             }
@@ -214,6 +240,27 @@ public class AnadirJugadoresBlueActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    private void createMessage(int mensaje) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AnadirJugadoresBlueActivity.this);
+        builder.setMessage(mensaje)
+                .setTitle("Error")
+                .setNeutralButton(R.string.button_volver, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void toastMessage(){
+        Context context = getApplicationContext();
+        CharSequence text = "Error: No puedes enviar un apodo sin antes conectarte";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
 }

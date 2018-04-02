@@ -42,6 +42,9 @@ class TakeVideoActivity : AppCompatActivity() {
             val videoUri = intent.data
             videoView.setVideoURI(videoUri)
         }
+        else{
+            launchTakeOtherPhotoActivity()
+        }
     }
 
     private fun launchTakeOtherPhotoActivity() {
